@@ -131,16 +131,29 @@ nav.scrolled {
   mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black, transparent);
 }
 
-/* Large decorative number */
-.hero-deco {
-  position:absolute; right:-20px; top:50%;
-  transform:translateY(-55%);
-  font-family:var(--font-display); font-size:clamp(280px,30vw,520px);
-  font-weight:800; line-height:1;
-  color:transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.03);
-  pointer-events:none; user-select:none;
-  letter-spacing:-20px;
+/* ─── SNAKE GAME ─── */
+.snake-wrap {
+  position:absolute; top:0; bottom:0; right:0;
+  width:48%; display:flex; align-items:center; justify-content:center;
+  pointer-events:none; overflow:hidden;
+}
+#snakeCanvas {
+  opacity:0.7;
+  image-rendering:pixelated;
+  border-radius:8px;
+  box-shadow:
+    0 0 0 1px rgba(184,245,102,0.07),
+    0 0 80px rgba(184,245,102,0.05),
+    inset 0 0 60px rgba(0,0,0,0.4);
+  background: rgba(6,10,8,0.75);
+}
+.snake-score {
+  position:absolute; top:50%; right:3%;
+  transform:translateY(-50%);
+  font-family:'Courier New',monospace; font-size:10px;
+  color:rgba(184,245,102,0.3); letter-spacing:0.15em;
+  writing-mode:vertical-rl; text-transform:uppercase;
+  pointer-events:none; line-height:2.4;
 }
 
 .hero-tag {
@@ -747,7 +760,6 @@ footer p { font-size:13px; color:var(--muted); }
   .modal-stats{grid-template-columns:1fr 1fr}
   .contact-section{padding:100px 24px}
   footer{flex-direction:column;gap:16px;text-align:center}
-  .hero-deco{display:none}
   .cv-trigger-wrap{padding:0 24px 60px}
 }
 </style>
@@ -766,14 +778,17 @@ footer p { font-size:13px; color:var(--muted); }
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:shyanipal06@gmail.com" class="nav-cta">Let's talk →</a>
+  <a href="/cdn-cgi/l/email-protection#acdfc4d5cdc2c5dccdc09c9aeccbc1cdc5c082cfc3c1" class="nav-cta">Let's talk →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-mesh"></div>
   <div class="hero-grid"></div>
-  <div class="hero-deco">SP</div>
+  <div class="snake-wrap">
+    <canvas id="snakeCanvas"></canvas>
+    <div class="snake-score" id="snakeScore"></div>
+  </div>
 
   <div class="hero-tag">
     <span class="hero-tag-line"></span>
@@ -1192,9 +1207,9 @@ footer p { font-size:13px; color:var(--muted); }
   <h2 class="contact-title reveal">Ready when<br>you are.</h2>
   <p class="contact-sub reveal">If you're building a product where mobile craft, interaction quality, and shipping velocity matter — let's talk.</p>
   <div class="contact-btns reveal">
-    <a href="mailto:shyanipal06@gmail.com" class="btn-primary">
+    <a href="/cdn-cgi/l/email-protection#ccbfa4b5ada2a5bcada0fcfa8caba1ada5a0e2afa3a1" class="btn-primary">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-      shyanipal06@gmail.com
+      <span class="__cf_email__" data-cfemail="9be8f3e2faf5f2ebfaf7abaddbfcf6faf2f7b5f8f4f6">[email&#160;protected]</span>
     </a>
     <a href="https://heyshyani.design" target="_blank" class="btn-ghost">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -1212,7 +1227,7 @@ footer p { font-size:13px; color:var(--muted); }
   <p>© 2025 Shyani Pal · Product Designer</p>
   <div class="footer-links">
     <a href="https://heyshyani.design">Portfolio</a>
-    <a href="mailto:shyanipal06@gmail.com">Email</a>
+    <a href="/cdn-cgi/l/email-protection#f2819a8b939c9b82939ec2c4b2959f939b9edc919d9f">Email</a>
     <a href="https://linkedin.com/in/shyanipal">LinkedIn</a>
   </div>
 </footer>
@@ -1231,7 +1246,7 @@ footer p { font-size:13px; color:var(--muted); }
       <div class="mstat"><div class="mstat-val">£3K+</div><div class="mstat-lbl">Monthly value unlocked</div></div>
     </div>
     <div class="modal-actions">
-      <a href="mailto:shyanipal06@gmail.com?subject=CV Request — Shyani Pal" class="modal-btn-primary">
+      <a href="/cdn-cgi/l/email-protection#2d5e45544c43445d4c411d1b6d4a404c4441034e4240125e584f47484e59106e7b0d7f485c58485e590dcfadb90d7e45544c43440d7d4c41" class="modal-btn-primary">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
         Request Full CV
       </a>
@@ -1258,37 +1273,202 @@ const ro = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 revealEls.forEach(el => ro.observe(el));
 
-// Experience nav highlight on scroll
+// Experience nav
 const expItems = document.querySelectorAll('.exp-item');
 const expNavItems = document.querySelectorAll('.exp-nav-item');
 const expObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       const id = e.target.id;
-      expNavItems.forEach(n => {
-        n.classList.toggle('active', n.dataset.target === id);
-      });
+      expNavItems.forEach(n => n.classList.toggle('active', n.dataset.target === id));
     }
   });
 }, { threshold: 0.5 });
 expItems.forEach(el => expObserver.observe(el));
-
-// Exp nav click
 expNavItems.forEach(item => {
   item.addEventListener('click', () => {
-    const target = document.getElementById(item.dataset.target);
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const t = document.getElementById(item.dataset.target);
+    if (t) t.scrollIntoView({ behavior:'smooth', block:'center' });
   });
 });
 
-// Parallax hero deco text
-const heroDeco = document.querySelector('.hero-deco');
-if (heroDeco) {
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    heroDeco.style.transform = `translateY(calc(-55% + ${y * 0.15}px))`;
-  });
-}
+// ─── NOKIA SNAKE ───────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('snakeCanvas');
+  if (!canvas) return;
+  const CELL=14, COLS=24, ROWS=28;
+  const W=COLS*CELL, H=ROWS*CELL;
+  canvas.width=W; canvas.height=H;
+  const ctx = canvas.getContext('2d');
+
+  const LETTERS = {
+    'U':[1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0],
+    'X':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,1],
+    'F':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0],
+    'Y':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
+    'L':[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,1,1,1],
+    'E':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,1,1,1,1],
+    'I':[0,1,1,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,1,0],
+    'N':[1,0,0,0,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,1,1,0,0,0,1],
+    'T':[1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
+    'C':[0,1,1,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1,1,0],
+    'H':[1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1],
+    'A':[0,1,1,1,0,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1],
+    'G':[0,1,1,1,0,1,0,0,0,0,1,0,1,1,1,1,0,0,0,1,0,1,1,1,0],
+    'O':[0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0],
+    'S':[0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0],
+    'P':[1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0],
+    'R':[1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,1,0,0,1,0,0,1,0],
+    'D':[1,1,1,0,0,1,0,0,1,0,1,0,0,0,1,1,0,0,1,0,1,1,1,0,0],
+    'B':[1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,0,0,1,1,1,1,1,0],
+    'M':[1,0,0,0,1,1,1,0,1,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,1],
+    'Z':[1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1],
+    'W':[1,0,0,0,1,1,0,0,0,1,1,0,1,0,1,1,1,0,1,1,1,0,0,0,1],
+    'V':[1,0,0,0,1,1,0,0,0,1,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0],
+    'K':[1,0,0,1,0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0,1,0,0,1,0],
+  };
+
+  const MILESTONES = ['UX','FYLE','FLITS','CRAFT','MOBILE','DESIGN','MERCEDES','HOSAKSHAM'];
+  let mIdx=0, snake, dir, nextDir, foodCells, eatenCells, score, frame, gameOver;
+
+  function letterCells(ch, ox, oy) {
+    const m = LETTERS[ch]; if(!m) return [];
+    const out=[];
+    for(let r=0;r<5;r++) for(let c=0;c<5;c++) if(m[r*5+c]) out.push({x:ox+c,y:oy+r});
+    return out;
+  }
+
+  function wordCells(word) {
+    const tw = word.length*6-1;
+    const sx = Math.floor((COLS-tw)/2);
+    const sy = Math.floor((ROWS-5)/2)-2;
+    let cells=[];
+    for(let i=0;i<word.length;i++) cells=cells.concat(letterCells(word[i],sx+i*6,sy));
+    return cells.filter(c=>c.x>=0&&c.x<COLS&&c.y>=0&&c.y<ROWS);
+  }
+
+  function has(arr,x,y){ return arr.some(s=>s.x===x&&s.y===y); }
+
+  function init() {
+    snake=[];
+    for(let i=7;i>=0;i--) snake.push({x:i,y:Math.floor(ROWS/2)});
+    dir={x:1,y:0}; nextDir={x:1,y:0};
+    score=0; frame=0; gameOver=false; eatenCells=[];
+    mIdx=0; loadWord();
+  }
+
+  function loadWord() {
+    const word = MILESTONES[mIdx % MILESTONES.length]; mIdx++;
+    foodCells = wordCells(word).filter(f=>!has(snake,f.x,f.y));
+  }
+
+  function step() {
+    dir=nextDir;
+    const h={x:(snake[0].x+dir.x+COLS)%COLS, y:(snake[0].y+dir.y+ROWS)%ROWS};
+    if(has(snake,h.x,h.y)){ gameOver=true; setTimeout(()=>{eatenCells=[];init();},900); return; }
+    snake.unshift(h);
+    const f=foodCells[0];
+    let ate=false;
+    if(f&&h.x===f.x&&h.y===f.y){
+      ate=true; eatenCells.push({x:f.x,y:f.y}); foodCells.shift(); score++;
+      if(foodCells.length===0) setTimeout(()=>{ eatenCells=[]; loadWord(); score=0; },500);
+    }
+    if(!ate) snake.pop();
+
+    // AI steer
+    const target=foodCells[0];
+    if(target){
+      const hd=snake[0];
+      const cands=[
+        {x:1,y:0},{x:-1,y:0},{x:0,y:1},{x:0,y:-1}
+      ].filter(d=>!(d.x===-dir.x&&d.y===-dir.y)).filter(d=>{
+        const nx=(hd.x+d.x+COLS)%COLS, ny=(hd.y+d.y+ROWS)%ROWS;
+        return !has(snake.slice(0,-1),nx,ny);
+      });
+      if(cands.length){
+        cands.sort((a,b)=>{
+          const da=Math.abs((hd.x+a.x)-target.x)+Math.abs((hd.y+a.y)-target.y);
+          const db=Math.abs((hd.x+b.x)-target.x)+Math.abs((hd.y+b.y)-target.y);
+          return da-db;
+        });
+        nextDir=cands[0];
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#06080a'; ctx.fillRect(0,0,W,H);
+
+    // Grid
+    ctx.fillStyle='rgba(184,245,102,0.03)';
+    for(let x=0;x<COLS;x++) for(let y=0;y<ROWS;y++)
+      ctx.fillRect(x*CELL+CELL/2-0.5,y*CELL+CELL/2-0.5,1,1);
+
+    // Eaten glow
+    eatenCells.forEach(c=>{
+      ctx.fillStyle='rgba(184,245,102,0.1)';
+      ctx.fillRect(c.x*CELL,c.y*CELL,CELL,CELL);
+    });
+
+    // Food letter cells
+    const next=foodCells[0];
+    foodCells.forEach(c=>{
+      const isN=next&&c.x===next.x&&c.y===next.y;
+      if(isN){
+        const p=0.5+0.5*Math.sin(frame*0.2);
+        ctx.fillStyle=`rgba(255,107,157,${0.55+0.45*p})`;
+        ctx.shadowColor='rgba(255,107,157,0.5)'; ctx.shadowBlur=8*p;
+        ctx.beginPath(); ctx.roundRect(c.x*CELL+2,c.y*CELL+2,CELL-4,CELL-4,2); ctx.fill();
+        ctx.shadowBlur=0;
+      } else {
+        ctx.fillStyle='rgba(184,245,102,0.14)';
+        ctx.fillRect(c.x*CELL+4,c.y*CELL+4,CELL-8,CELL-8);
+      }
+    });
+
+    // Snake
+    snake.forEach((seg,i)=>{
+      if(i===0){
+        ctx.fillStyle='#d4ff7a';
+        ctx.beginPath(); ctx.roundRect(seg.x*CELL+1,seg.y*CELL+1,CELL-2,CELL-2,3); ctx.fill();
+        ctx.fillStyle='#06080a';
+        const eo=CELL*0.22, es=2;
+        const px=dir.y, py=-dir.x;
+        ctx.fillRect(seg.x*CELL+CELL/2+dir.x*eo+px*eo-es/2, seg.y*CELL+CELL/2+dir.y*eo+py*eo-es/2,es,es);
+        ctx.fillRect(seg.x*CELL+CELL/2+dir.x*eo-px*eo-es/2, seg.y*CELL+CELL/2+dir.y*eo-py*eo-es/2,es,es);
+      } else {
+        const t=i/snake.length;
+        ctx.globalAlpha=Math.max(0.3,1-t*0.55);
+        ctx.fillStyle=i%2===0?'#b8f566':'#8bc34a';
+        const ins=1+t*1.5;
+        ctx.beginPath(); ctx.roundRect(seg.x*CELL+ins,seg.y*CELL+ins,CELL-ins*2,CELL-ins*2,2); ctx.fill();
+        ctx.globalAlpha=1;
+      }
+    });
+
+    // Word label
+    const word=MILESTONES[(mIdx-1)%MILESTONES.length];
+    ctx.font="bold 8px 'Courier New',monospace";
+    ctx.fillStyle='rgba(184,245,102,0.22)';
+    ctx.textAlign='center';
+    ctx.fillText(word, W/2, 11);
+
+    if(gameOver){
+      ctx.fillStyle='rgba(6,8,10,0.75)'; ctx.fillRect(0,0,W,H);
+      ctx.font="bold 9px 'Courier New'"; ctx.fillStyle='rgba(184,245,102,0.6)';
+      ctx.textAlign='center'; ctx.fillText('RESTARTING...',W/2,H/2);
+    }
+  }
+
+  function loop(){
+    frame++;
+    if(!gameOver && frame%7===0) step();
+    draw();
+    requestAnimationFrame(loop);
+  }
+  init(); loop();
+})();
 </script>
 </body>
 </html>
