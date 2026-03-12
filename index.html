@@ -104,117 +104,90 @@ nav.scrolled {
 .nav-cta:hover::before { opacity:0.15; }
 .nav-cta:hover { transform:translateY(-1px); box-shadow:0 8px 24px var(--accent-glow); }
 
-/* ─── HERO — Full viewport snake ─── */
+/* ─── HERO — pure snake canvas ─── */
 .hero {
   position: relative;
   width: 100%; height: 100vh;
   overflow: hidden;
-  display: flex; align-items: flex-end;
+  background: #050709;
 }
-
-/* Canvas fills entire hero */
 #snakeCanvas {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   image-rendering: pixelated;
   display: block;
 }
-
-/* Gradient vignette so text stays readable */
-.hero-vignette {
-  position: absolute; inset: 0; pointer-events: none;
-  background:
-    linear-gradient(to top, rgba(6,6,10,0.96) 0%, rgba(6,6,10,0.4) 35%, transparent 60%),
-    linear-gradient(to right, rgba(6,6,10,0.5) 0%, transparent 40%);
+.hero-scroll-nudge {
+  position: absolute; bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  z-index: 10; pointer-events: none;
+  animation: fadeInNudge 1s ease 2s both;
 }
-
-/* All hero text — sits above canvas */
-.hero-content {
-  position: relative; z-index: 10;
-  width: 100%; padding: 0 56px 72px;
-  display: flex; flex-direction: column;
-}
-
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--accent);
-  margin-bottom: 20px;
-  opacity: 0; animation: slideUp 0.7s var(--ease-out) 0.3s forwards;
-}
-.hero-tag-line { width: 24px; height: 1px; background: var(--accent); flex-shrink:0; }
-
-h1.hero-title {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(56px, 8.5vw, 128px);
-  line-height: 0.92; letter-spacing: -3px;
-  margin-bottom: 40px;
-  opacity: 0; animation: slideUp 0.8s var(--ease-out) 0.5s forwards;
-}
-.hero-title .dim { color: rgba(238,234,227,0.18); }
-.hero-title .outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--accent);
-  transition: color 0.3s, -webkit-text-stroke 0.3s;
-}
-.hero-title .outline:hover { color: var(--accent); -webkit-text-stroke: 0px; }
-
-.hero-bottom {
-  display: flex; align-items: flex-end;
-  justify-content: space-between; gap: 40px;
-  opacity: 0; animation: slideUp 0.8s var(--ease-out) 0.7s forwards;
-}
-.hero-desc {
-  max-width: 440px; font-size: 15px; line-height: 1.8;
-  color: rgba(238,234,227,0.5);
-}
-.hero-desc strong { color: var(--text); font-weight: 500; }
-
-.hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
-
-.status-pill {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 10px 18px;
-  background: rgba(184,245,102,0.06);
-  border: 1px solid rgba(184,245,102,0.18);
-  border-radius: 100px; font-size: 12px; color: var(--text);
-  letter-spacing: 0.02em;
-  backdrop-filter: blur(8px);
-}
-.status-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--accent); box-shadow: 0 0 10px var(--accent);
-  animation: breathe 2s ease-in-out infinite;
-}
-
-/* Milestone label shown from JS — bottom-centre */
-.hero-milestone {
-  position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
-  z-index: 11; pointer-events: none;
-  font-family: 'Courier New', monospace; font-size: 10px;
-  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--accent); opacity: 0;
-  transition: opacity 0.5s, color 0.5s;
-  white-space: nowrap;
-  text-shadow: 0 0 12px var(--accent);
-}
-
-.scroll-hint {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--muted);
+.hero-scroll-nudge span {
+  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(184,245,102,0.35); font-family: 'Courier New', monospace;
 }
 .scroll-track {
-  width: 1px; height: 48px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(184,245,102,0.5), transparent);
   position: relative; overflow: hidden;
 }
 .scroll-track::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 50%; background: var(--bg);
+  content: ''; position: absolute; top: -100%; left: 0; right: 0;
+  height: 50%; background: #050709;
   animation: scanDown 2s ease-in-out infinite;
 }
-@keyframes scanDown { 0%{top:0} 100%{top:100%} }
+@keyframes scanDown { 0%{top:-50%} 100%{top:100%} }
+@keyframes fadeInNudge { from{opacity:0} to{opacity:1} }
+
+/* ─── INTRO SECTION ─── */
+.intro-section {
+  padding: 100px 56px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.intro-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.intro-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(56px, 7vw, 104px);
+  line-height: 0.92; letter-spacing: -3px;
+  margin: 20px 0 36px;
+}
+.intro-dim { color: rgba(238,234,227,0.18); display: block; }
+.intro-outline {
+  display: block; color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  transition: color 0.3s, -webkit-text-stroke 0.3s;
+}
+.intro-outline:hover { color: var(--accent); -webkit-text-stroke: 0px; }
+
+.intro-desc {
+  font-size: 17px; line-height: 1.8;
+  color: rgba(238,234,227,0.55);
+  margin-bottom: 48px;
+}
+.intro-desc strong { color: var(--text); font-weight: 500; }
+
+.intro-stats {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+}
+.istat {
+  background: var(--surface); padding: 24px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+  transition: background 0.3s;
+}
+.istat:hover { background: var(--surface2); }
+.istat-val {
+  font-family: var(--font-display); font-size: 28px;
+  font-weight: 800; letter-spacing: -1px; color: var(--accent);
+}
+.istat-lbl { font-size: 11px; color: var(--muted2); line-height: 1.4; }
 
 @keyframes slideUp {
   from { opacity:0; transform:translateY(36px); }
@@ -741,9 +714,9 @@ footer p { font-size:13px; color:var(--muted); }
   nav{padding:18px 24px}
   .nav-links{display:none}
   .section{padding:80px 24px}
-  .hero-content{padding:0 24px 56px}
-  .hero-bottom{flex-direction:column;gap:24px;align-items:flex-start}
-  .about-layout,.case-card,.exp-grid,.thinking-layout,.award-grid{grid-template-columns:1fr;gap:40px}
+  .intro-layout{grid-template-columns:1fr;gap:40px}
+  .intro-section{padding:64px 24px}
+  .intro-stats{grid-template-columns:repeat(2,1fr)}
   .testi-grid,.cap-grid{grid-template-columns:1fr}
   .case-visual{min-height:260px}
   .modal-stats{grid-template-columns:1fr 1fr}
@@ -770,107 +743,37 @@ footer p { font-size:13px; color:var(--muted); }
   <a href="/cdn-cgi/l/email-protection#acdfc4d5cdc2c5dccdc09c9aeccbc1cdc5c082cfc3c1" class="nav-cta">Let's talk →</a>
 </nav>
 
-<!-- HERO — full viewport snake game -->
+<!-- HERO — pure snake, nothing else -->
 <section class="hero">
   <canvas id="snakeCanvas"></canvas>
-  <div class="hero-vignette"></div>
-  <div class="hero-milestone" id="heroMilestone"></div>
-
-  <div class="hero-content">
-    <div class="hero-tag">
-      <span class="hero-tag-line"></span>
-      Product Designer · 5+ Years
-    </div>
-    <h1 class="hero-title">
-      Designing<br>
-      <span class="dim">products</span><br>
-      <span class="outline">feel alive</span>
-    </h1>
-    <div class="hero-bottom">
-      <p class="hero-desc">
-        From <strong>fintech to connected mobility</strong>, I craft native mobile experiences where engineering precision meets human intuition. Currently at <strong>Mercedes-Benz R&D</strong>.
-      </p>
-      <div class="hero-right">
-        <div class="status-pill">
-          <div class="status-dot"></div>
-          Available for senior roles · Global teams welcome
-        </div>
-        <div class="scroll-hint">
-          <div class="scroll-track"></div>
-          Scroll
-        </div>
-      </div>
-    </div>
+  <div class="hero-scroll-nudge">
+    <div class="scroll-track"></div>
+    <span>scroll</span>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">Native Mobile UX<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Interaction Design<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Connected Mobility<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Design Systems<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Motion & Haptics<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">AI-Assisted Workflows<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Fintech UX<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">User Research<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <!-- duplicate -->
-    <span class="marquee-item">Native Mobile UX<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Interaction Design<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Connected Mobility<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Design Systems<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Motion & Haptics<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">AI-Assisted Workflows<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">Fintech UX<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-    <span class="marquee-item">User Research<span class="marquee-sep">&nbsp;✦&nbsp;</span></span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="about-layout">
-    <div>
-      <div class="eyebrow reveal">About</div>
-      <div class="stat-wall reveal reveal-d1">
-        <div class="stat-cell">
-          <div class="stat-val">5+</div>
-          <div class="stat-lbl">Years of product design</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-val">4</div>
-          <div class="stat-lbl">Global products shipped</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-val">£3K</div>
-          <div class="stat-lbl">Monthly value unlocked via design</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-val">MSc</div>
-          <div class="stat-lbl">UX · Bournemouth University, UK</div>
-        </div>
+<!-- INTRO — content starts here -->
+<section class="intro-section" id="about">
+  <div class="intro-layout">
+    <div class="intro-left">
+      <div class="eyebrow">Product Designer</div>
+      <h1 class="intro-title">
+        Designing<br>
+        <span class="intro-dim">products</span><br>
+        <span class="intro-outline">feel alive</span>
+      </h1>
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        Available for senior roles · Global teams welcome
       </div>
     </div>
-    <div>
-      <h2 class="about-heading reveal">
-        I close the gap<br>
-        between <span class="ghost">complex</span><br>
-        and <em>intuitive</em>
-      </h2>
-      <div class="about-body reveal reveal-d1">
-        <p>I don't just push pixels — I shape how people <strong>feel</strong> when using a product. My work lives in the space where a thoughtful animation changes behaviour, or a restructured flow saves someone three minutes every single day.</p>
-        <p>At Mercedes-Benz, I'm designing the invisible thread between your phone and your car. Before that: <strong>enterprise fintech at Fyle (acquired by Sage)</strong>, zero-to-one founding designer at HoSaksham, and merchant tools Shopify stores depended on daily.</p>
-        <p>I think in <strong>systems</strong>, feel in <strong>interactions</strong>, and ship in <strong>native</strong>. iOS and Android — I know the difference between a platform pattern and a shortcut.</p>
-      </div>
-      <div class="skill-chips reveal reveal-d2">
-        <span class="chip">Jobs-to-be-Done</span>
-        <span class="chip">WCAG Accessibility</span>
-        <span class="chip">HCI Research</span>
-        <span class="chip">Rapid Prototyping</span>
-        <span class="chip">Motion Design</span>
-        <span class="chip">Figma · Framer</span>
-        <span class="chip">LottieFiles Top Creator</span>
-        <span class="chip">AI-Assisted Design</span>
+    <div class="intro-right">
+      <p class="intro-desc">From <strong>fintech to connected mobility</strong>, I craft native mobile experiences where engineering precision meets human intuition. Currently shaping in-vehicle UX at <strong>Mercedes-Benz R&D</strong>.</p>
+      <div class="intro-stats">
+        <div class="istat"><span class="istat-val">5+</span><span class="istat-lbl">Years</span></div>
+        <div class="istat"><span class="istat-val">4</span><span class="istat-lbl">Products shipped</span></div>
+        <div class="istat"><span class="istat-val">£3K+</span><span class="istat-lbl">Monthly value</span></div>
+        <div class="istat"><span class="istat-val">MSc</span><span class="istat-lbl">UX · Bournemouth</span></div>
       </div>
     </div>
   </div>
@@ -1283,9 +1186,8 @@ expNavItems.forEach(item => {
 (function() {
   const canvas = document.getElementById('snakeCanvas');
   if (!canvas) return;
-  const milestoneEl = document.getElementById('heroMilestone');
 
-  const CELL = 18; // bigger cells on full viewport
+  const CELL = 18;
   let COLS, ROWS, W, H;
 
   function resize() {
@@ -1325,21 +1227,21 @@ expNavItems.forEach(item => {
   };
 
   const JOURNEY = [
-    { word:'UX',     label:'The Beginning',         color:'#b8f566' },
-    { word:'DESIGN', label:'Found the Craft',        color:'#b8f566' },
-    { word:'MOBILE', label:'Native & Proud',         color:'#6eb5ff' },
-    { word:'FYLE',   label:'Fintech · Acquired',     color:'#ff6b9d' },
-    { word:'FLITS',  label:'Shopify Scale',          color:'#a78bfa' },
-    { word:'MOTION', label:'Alive Interactions',     color:'#6eb5ff' },
-    { word:'BENZ',   label:'Mercedes · Now',         color:'#b8f566' },
+    { word:'UX',     label:'The Beginning',       color:'#b8f566' },
+    { word:'DESIGN', label:'Found the Craft',      color:'#b8f566' },
+    { word:'MOBILE', label:'Native & Proud',       color:'#6eb5ff' },
+    { word:'FYLE',   label:'Fintech · Acquired',   color:'#ff6b9d' },
+    { word:'FLITS',  label:'Shopify Scale',        color:'#a78bfa' },
+    { word:'MOTION', label:'Alive Interactions',   color:'#6eb5ff' },
+    { word:'BENZ',   label:'Mercedes · Now',       color:'#b8f566' },
   ];
 
   const ctx = canvas.getContext('2d');
   let mIdx=0, snake, dir, nextDir;
   let foodCells, eatenCells, frame, gameOver;
   let restartTimer=null, flashCells=[];
-  let currentColor='#b8f566';
-  let labelFadeTimer=null;
+  let currentColor='#b8f566', currentLabel='';
+  let labelAlpha=0, labelTimer=0;
 
   function letterCells(ch, ox, oy) {
     const m=FONT[ch]; if(!m) return [];
@@ -1350,9 +1252,8 @@ expNavItems.forEach(item => {
 
   function wordCells(word) {
     const charW=6, totalW=word.length*charW-1;
-    // Place letters in upper-centre of viewport
     const sx=Math.floor((COLS-totalW)/2);
-    const sy=Math.floor(ROWS*0.28);
+    const sy=Math.floor(ROWS*0.3);
     let cells=[];
     for(let i=0;i<word.length;i++) cells=cells.concat(letterCells(word[i],sx+i*charW,sy));
     return cells.filter(c=>c.x>=0&&c.x<COLS&&c.y>=0&&c.y<ROWS);
@@ -1360,21 +1261,12 @@ expNavItems.forEach(item => {
 
   function has(arr,x,y){ return arr.some(s=>s.x===x&&s.y===y); }
 
-  function showMilestone(m) {
-    if(!milestoneEl) return;
-    milestoneEl.textContent = m.label;
-    milestoneEl.style.color = m.color;
-    milestoneEl.style.textShadow = `0 0 16px ${m.color}`;
-    milestoneEl.style.opacity = '1';
-    if(labelFadeTimer) clearTimeout(labelFadeTimer);
-    labelFadeTimer = setTimeout(()=>{ milestoneEl.style.opacity='0'; }, 2200);
-  }
-
   function init() {
     snake=[];
     const sy=Math.floor(ROWS*0.65);
     const sx=Math.floor(COLS*0.15);
     for(let i=7;i>=0;i--) snake.push({x:sx+i,y:sy});
+
     dir={x:1,y:0}; nextDir={x:1,y:0};
     frame=0; gameOver=false; eatenCells=[]; flashCells=[];
     mIdx=0; loadWord();
@@ -1382,8 +1274,8 @@ expNavItems.forEach(item => {
 
   function loadWord() {
     const m=JOURNEY[mIdx%JOURNEY.length];
-    currentColor=m.color;
-    showMilestone(m);
+    currentColor=m.color; currentLabel=m.label;
+    labelAlpha=0; labelTimer=0;
     foodCells=wordCells(m.word).filter(f=>!has(snake,f.x,f.y));
     mIdx++;
   }
@@ -1521,6 +1413,31 @@ expNavItems.forEach(item => {
         ctx.globalAlpha=1;
       }
     });
+
+    // Milestone label — fades in bottom-centre on canvas
+    labelTimer++;
+    if(labelTimer>40) labelAlpha=Math.min(1,labelAlpha+0.035);
+    if(labelAlpha>0){
+      ctx.save();
+      ctx.globalAlpha=labelAlpha*0.7;
+      ctx.font="bold 11px 'Courier New',monospace";
+      ctx.fillStyle=currentColor;
+      ctx.textAlign='center';
+      ctx.letterSpacing='0.2em';
+      ctx.shadowColor=currentColor; ctx.shadowBlur=12;
+      ctx.fillText(currentLabel.toUpperCase(), W/2, H-36);
+      ctx.shadowBlur=0;
+      // Progress dots
+      const total=JOURNEY.length;
+      const dotW=6, dotGap=10, totalDotW=total*(dotW+dotGap)-dotGap;
+      const dx=W/2-totalDotW/2;
+      for(let i=0;i<total;i++){
+        ctx.globalAlpha=labelAlpha*(i<mIdx?0.6:0.12);
+        ctx.fillStyle=i<mIdx?currentColor:'rgba(255,255,255,0.3)';
+        ctx.beginPath(); ctx.arc(dx+i*(dotW+dotGap)+dotW/2, H-16, dotW/2,0,Math.PI*2); ctx.fill();
+      }
+      ctx.restore();
+    }
 
     // Game over dim
     if(gameOver){
