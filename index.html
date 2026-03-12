@@ -311,7 +311,20 @@ nav.scrolled {
 .case-role { font-size:13px; color:var(--muted2); margin-bottom:28px; }
 .case-desc { font-size:15px; line-height:1.75; color:rgba(238,234,227,0.55); margin-bottom:36px; flex:1; }
 
-.case-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:40px; }
+.case-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.case-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:4px; margin-bottom:36px; padding:12px 22px; border-radius:100px;
+  font-size:12px; font-weight:600; letter-spacing:0.06em;
+  text-decoration:none; border:1px solid; transition:all 0.25s;
+  font-family:var(--font-display);
+}
+.case-btn svg { transition:transform 0.2s; }
+.case-btn:hover svg { transform:translateX(3px); }
+.case-btn-green { color:var(--accent); border-color:rgba(184,245,102,0.3); background:rgba(184,245,102,0.07); }
+.case-btn-green:hover { background:var(--accent); color:var(--bg); box-shadow:0 8px 24px rgba(184,245,102,0.25); }
+.case-btn-pink { color:var(--pink); border-color:rgba(255,107,157,0.3); background:rgba(255,107,157,0.07); }
+.case-btn-pink:hover { background:var(--pink); color:#fff; box-shadow:0 8px 24px rgba(255,107,157,0.25); }
 .pill {
   font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
   padding:5px 14px; border-radius:100px; background:rgba(255,255,255,0.05);
@@ -904,6 +917,7 @@ footer p { font-size:13px; color:var(--muted); }
             <span class="pill">Information Architecture</span>
             <span class="pill">MVP Strategy</span>
           </div>
+          <a href="hosaksham-case-study.html" class="case-btn case-btn-green">View Case Study <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="case-metrics">
           <div class="metric"><span class="metric-val mv-green">100+</span><span class="metric-lbl">Downloads at launch</span></div>
@@ -955,6 +969,7 @@ footer p { font-size:13px; color:var(--muted); }
             <span class="pill">Design Systems</span>
             <span class="pill">Cross-functional</span>
           </div>
+          <a href="#" class="case-btn case-btn-pink">View Case Study <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="case-metrics">
           <div class="metric"><span class="metric-val mv-pink">£3K+</span><span class="metric-lbl">Monthly reimbursements</span></div>
@@ -1105,35 +1120,6 @@ footer p { font-size:13px; color:var(--muted); }
     View Full CV
   </button>
 </div>
-
-<!-- TESTIMONIALS -->
-<section class="section">
-  <div class="eyebrow reveal">Social Proof</div>
-  <h2 class="section-title reveal">What collaborators say</h2>
-  <div class="testi-grid">
-    <div class="testi-card reveal">
-      <p class="testi-quote">Shyani has a rare ability to <strong>hold the complexity of a system in one hand and the user's feeling in the other</strong> — and deliver something that makes both make sense. Her mobile flows were some of the most considered I've seen.</p>
-      <div class="testi-author">
-        <div class="testi-av av1">R</div>
-        <div><div class="testi-role">Product Manager · Fyle (Sage)</div></div>
-      </div>
-    </div>
-    <div class="testi-card reveal reveal-d1">
-      <p class="testi-quote">Working with Shyani as our founding designer was a turning point. She didn't just design screens — she <strong>shaped how we thought about the product</strong>. The MVP shipped clean, fast, and users got it immediately.</p>
-      <div class="testi-author">
-        <div class="testi-av av2">A</div>
-        <div><div class="testi-role">Co-Founder · HoSaksham</div></div>
-      </div>
-    </div>
-    <div class="testi-card reveal reveal-d2">
-      <p class="testi-quote">She bridges the gap between engineering constraints and UX ambition better than almost anyone I've worked with. <strong>Shyani speaks the language of both worlds</strong> — which makes shipping premium mobile experiences actually possible.</p>
-      <div class="testi-author">
-        <div class="testi-av av3">K</div>
-        <div><div class="testi-role">Senior Engineer · Mercedes-Benz R&D</div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CURRENTLY THINKING -->
 <section class="section section-alt">
