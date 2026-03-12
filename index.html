@@ -710,19 +710,124 @@ footer p { font-size:13px; color:var(--muted); }
 .reveal-d3 { transition-delay:0.3s; }
 
 /* ─── RESPONSIVE ─── */
+/* ─── RESPONSIVE ─────────────────────────────── */
+
+/* Tablet — 960px */
 @media(max-width:960px){
-  nav{padding:18px 24px}
-  .nav-links{display:none}
-  .section{padding:80px 24px}
-  .intro-layout{grid-template-columns:1fr;gap:40px}
-  .intro-section{padding:64px 24px}
-  .intro-stats{grid-template-columns:repeat(2,1fr)}
-  .testi-grid,.cap-grid{grid-template-columns:1fr}
-  .case-visual{min-height:260px}
-  .modal-stats{grid-template-columns:1fr 1fr}
-  .contact-section{padding:100px 24px}
-  footer{flex-direction:column;gap:16px;text-align:center}
-  .cv-trigger-wrap{padding:0 24px 60px}
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .section { padding: 72px 24px; }
+
+  /* Intro */
+  .intro-section { padding: 56px 24px; }
+  .intro-layout { grid-template-columns: 1fr; gap: 40px; }
+  .intro-title { font-size: clamp(48px, 10vw, 80px); }
+  .intro-stats { grid-template-columns: repeat(2,1fr); }
+
+  /* About (if any remaining) */
+  .about-layout { grid-template-columns: 1fr; gap: 48px; }
+
+  /* Case studies */
+  .case-card { grid-template-columns: 1fr; }
+  .case-visual { min-height: 240px; }
+
+  /* Experience */
+  .exp-grid { grid-template-columns: 1fr; gap: 0; }
+  .exp-nav { display: none; }
+
+  /* Capabilities */
+  .cap-grid { grid-template-columns: repeat(2,1fr); }
+
+  /* Testimonials */
+  .testi-grid { grid-template-columns: 1fr; }
+
+  /* Thinking */
+  .thinking-layout { grid-template-columns: 1fr; gap: 40px; }
+  .thought-grid { grid-template-columns: repeat(2,1fr); }
+
+  /* Awards */
+  .award-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Contact */
+  .contact-section { padding: 80px 24px; }
+  .contact-title { font-size: clamp(36px, 8vw, 64px); }
+  .contact-btns { flex-direction: column; align-items: stretch; }
+  .contact-btns a { justify-content: center; }
+
+  /* CV modal */
+  .modal-stats { grid-template-columns: repeat(2,1fr); }
+  .modal-actions { flex-direction: column; }
+
+  /* Footer */
+  footer { flex-direction: column; gap: 14px; text-align: center; }
+  .cv-trigger-wrap { padding: 0 24px 48px; }
+}
+
+/* Mobile — 600px */
+@media(max-width:600px){
+  .section { padding: 56px 20px; }
+
+  /* Nav */
+  nav { padding: 14px 20px; }
+  .nav-cta { padding: 8px 16px; font-size: 11px; }
+
+  /* Hero scroll nudge */
+  .hero-scroll-nudge { bottom: 20px; }
+
+  /* Intro */
+  .intro-section { padding: 48px 20px; }
+  .intro-title { font-size: clamp(40px, 12vw, 64px); letter-spacing: -2px; }
+  .intro-stats { grid-template-columns: repeat(2,1fr); gap: 1px; }
+  .istat { padding: 18px 14px; }
+  .istat-val { font-size: 22px; }
+  .intro-desc { font-size: 15px; }
+  .status-pill { font-size: 11px; padding: 9px 14px; }
+
+  /* Eyebrow + section titles */
+  .section-title { font-size: clamp(28px, 8vw, 48px); letter-spacing: -1px; margin-bottom: 40px; }
+
+  /* Case studies */
+  .case-visual { min-height: 200px; }
+  .case-num { font-size: 10px; }
+  .case-company { font-size: 22px; }
+  .case-pills { gap: 6px; }
+  .pill { font-size: 10px; padding: 5px 10px; }
+  .case-metrics { grid-template-columns: repeat(3,1fr); gap: 8px; }
+
+  /* Capabilities */
+  .cap-grid { grid-template-columns: 1fr; }
+
+  /* Thought cards */
+  .thought-grid { grid-template-columns: 1fr; }
+
+  /* Experience */
+  .exp-item { padding: 28px 0; }
+  .exp-role { font-size: 18px; }
+
+  /* Testimonials */
+  .testi-card { padding: 28px 24px; }
+
+  /* Contact */
+  .contact-section { padding: 64px 20px; }
+  .contact-title { font-size: clamp(32px, 10vw, 56px); }
+  .btn-primary, .btn-ghost { padding: 14px 20px; font-size: 13px; }
+
+  /* Modal */
+  .modal { padding: 28px 20px; margin: 16px; border-radius: 20px; }
+  .modal-title { font-size: 28px; }
+  .modal-stats { grid-template-columns: repeat(2,1fr); gap: 8px; }
+
+  /* Footer */
+  footer { padding: 24px 20px; }
+  .footer-links { gap: 20px; }
+}
+
+/* Very small — 400px */
+@media(max-width:400px){
+  .intro-title { font-size: 36px; }
+  .intro-stats { grid-template-columns: 1fr 1fr; }
+  .istat-val { font-size: 20px; }
+  .contact-title { font-size: 30px; }
 }
 </style>
 </head>
@@ -932,7 +1037,7 @@ footer p { font-size:13px; color:var(--muted); }
   <h2 class="section-title reveal">Where I've shipped</h2>
   <div class="exp-grid">
     <div class="exp-nav reveal">
-      <div class="exp-nav-item active" data-target="e1"><div class="exp-nav-dot"></div><span class="exp-nav-co">Mercedes-Benz</span><span class="exp-nav-yr">2025</span></div>
+      <div class="exp-nav-item active" data-target="e1"><div class="exp-nav-dot"></div><span class="exp-nav-co">Mercedes-Benz</span><span class="exp-nav-yr">2026</span></div>
       <div class="exp-nav-item" data-target="e2"><div class="exp-nav-dot"></div><span class="exp-nav-co">HoSaksham</span><span class="exp-nav-yr">2024</span></div>
       <div class="exp-nav-item" data-target="e3"><div class="exp-nav-dot"></div><span class="exp-nav-co">Flits</span><span class="exp-nav-yr">2021</span></div>
       <div class="exp-nav-item" data-target="e4"><div class="exp-nav-dot"></div><span class="exp-nav-co">Fyle · Sage</span><span class="exp-nav-yr">2019</span></div>
@@ -1010,21 +1115,21 @@ footer p { font-size:13px; color:var(--muted); }
       <p class="testi-quote">Shyani has a rare ability to <strong>hold the complexity of a system in one hand and the user's feeling in the other</strong> — and deliver something that makes both make sense. Her mobile flows were some of the most considered I've seen.</p>
       <div class="testi-author">
         <div class="testi-av av1">R</div>
-        <div><div class="testi-name">Rohan Mehta</div><div class="testi-role">Product Manager · Fyle (Sage)</div></div>
+        <div><div class="testi-role">Product Manager · Fyle (Sage)</div></div>
       </div>
     </div>
     <div class="testi-card reveal reveal-d1">
       <p class="testi-quote">Working with Shyani as our founding designer was a turning point. She didn't just design screens — she <strong>shaped how we thought about the product</strong>. The MVP shipped clean, fast, and users got it immediately.</p>
       <div class="testi-author">
         <div class="testi-av av2">A</div>
-        <div><div class="testi-name">Aman Sinha</div><div class="testi-role">Co-Founder · HoSaksham</div></div>
+        <div><div class="testi-role">Co-Founder · HoSaksham</div></div>
       </div>
     </div>
     <div class="testi-card reveal reveal-d2">
       <p class="testi-quote">She bridges the gap between engineering constraints and UX ambition better than almost anyone I've worked with. <strong>Shyani speaks the language of both worlds</strong> — which makes shipping premium mobile experiences actually possible.</p>
       <div class="testi-author">
         <div class="testi-av av3">K</div>
-        <div><div class="testi-name">Karan Verma</div><div class="testi-role">Senior Engineer · Mercedes-Benz R&D</div></div>
+        <div><div class="testi-role">Senior Engineer · Mercedes-Benz R&D</div></div>
       </div>
     </div>
   </div>
@@ -1038,7 +1143,7 @@ footer p { font-size:13px; color:var(--muted); }
     <div class="thought-list">
       <div class="thought reveal">
         <span class="thought-tag tt-green">Craft</span>
-        <p class="thought-text">Why do so many apps feel <strong>identical in 2025</strong>? We have more tooling, more AI, more references — and yet fewer products feel genuinely alive. We've optimised for components and forgotten about choreography.</p>
+        <p class="thought-text">Why do so many apps feel <strong>identical in 2026</strong>? We have more tooling, more AI, more references — and yet fewer products feel genuinely alive. We've optimised for components and forgotten about choreography.</p>
       </div>
       <div class="thought reveal reveal-d1">
         <span class="thought-tag tt-purple">AI × Design</span>
@@ -1059,7 +1164,6 @@ footer p { font-size:13px; color:var(--muted); }
       <div class="now-row"><div class="now-lbl">Reading</div><div class="now-val">The Design of Everyday Things · Don Norman</div></div>
       <div class="now-row"><div class="now-lbl">Exploring</div><div class="now-val">Spatial interaction for CarPlay & Android Auto</div></div>
       <div class="now-row"><div class="now-lbl">Inspired by</div><div class="now-val"><a href="https://linear.app" target="_blank">Linear's</a> interaction quality · <a href="https://revolut.com" target="_blank">Revolut's</a> mobile density</div></div>
-      <div class="now-row"><div class="now-lbl">Side project</div><div class="now-val"><a href="https://heyshyani.design/fun-vibe-coding.html" target="_blank">Vibe coding playground ↗</a></div></div>
     </div>
   </div>
 </section>
@@ -1100,10 +1204,6 @@ footer p { font-size:13px; color:var(--muted); }
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
       <span class="__cf_email__" data-cfemail="9be8f3e2faf5f2ebfaf7abaddbfcf6faf2f7b5f8f4f6">[email&#160;protected]</span>
     </a>
-    <a href="https://heyshyani.design" target="_blank" class="btn-ghost">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      heyshyani.design
-    </a>
     <a href="https://linkedin.com/in/shyanipal" target="_blank" class="btn-ghost">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
       LinkedIn
@@ -1113,9 +1213,8 @@ footer p { font-size:13px; color:var(--muted); }
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 Shyani Pal · Product Designer</p>
+  <p>© 2026 Shyani Pal · Product Designer</p>
   <div class="footer-links">
-    <a href="https://heyshyani.design">Portfolio</a>
     <a href="/cdn-cgi/l/email-protection#f2819a8b939c9b82939ec2c4b2959f939b9edc919d9f">Email</a>
     <a href="https://linkedin.com/in/shyanipal">LinkedIn</a>
   </div>
@@ -1187,10 +1286,16 @@ expNavItems.forEach(item => {
   const canvas = document.getElementById('snakeCanvas');
   if (!canvas) return;
 
-  const CELL = 18;
-  let COLS, ROWS, W, H;
+  let CELL, COLS, ROWS, W, H;
+
+  function getCellSize() {
+    if (window.innerWidth < 480) return 14;
+    if (window.innerWidth < 768) return 16;
+    return 20;
+  }
 
   function resize() {
+    CELL = getCellSize();
     W = window.innerWidth;
     H = window.innerHeight;
     COLS = Math.floor(W / CELL);
@@ -1221,19 +1326,17 @@ expNavItems.forEach(item => {
     'S':[0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0],
     'T':[1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
     'U':[1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0],
+    'V':[1,0,0,0,1,1,0,0,0,1,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0],
     'X':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,1],
     'Y':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
     'Z':[1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1],
   };
 
   const JOURNEY = [
-    { word:'UX',     label:'The Beginning',       color:'#b8f566' },
-    { word:'DESIGN', label:'Found the Craft',      color:'#b8f566' },
-    { word:'MOBILE', label:'Native & Proud',       color:'#6eb5ff' },
-    { word:'FYLE',   label:'Fintech · Acquired',   color:'#ff6b9d' },
-    { word:'FLITS',  label:'Shopify Scale',        color:'#a78bfa' },
-    { word:'MOTION', label:'Alive Interactions',   color:'#6eb5ff' },
-    { word:'BENZ',   label:'Mercedes · Now',       color:'#b8f566' },
+    { word:'DESIGN', label:'Design',         color:'#b8f566' },
+    { word:'VIBE',   label:'Vibe',           color:'#ff6b9d' },
+    { word:'CODER',  label:'Coder',          color:'#6eb5ff' },
+    { word:'ONLY',   label:'Only',           color:'#a78bfa' },
   ];
 
   const ctx = canvas.getContext('2d');
