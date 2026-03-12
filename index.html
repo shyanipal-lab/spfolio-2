@@ -104,133 +104,121 @@ nav.scrolled {
 .nav-cta:hover::before { opacity:0.15; }
 .nav-cta:hover { transform:translateY(-1px); box-shadow:0 8px 24px var(--accent-glow); }
 
-/* ─── HERO ─── */
+/* ─── HERO — Full viewport snake ─── */
 .hero {
-  min-height: 100vh;
-  display: flex; flex-direction:column; justify-content:flex-end;
-  padding: 0 56px 88px;
-  position: relative; overflow:hidden;
+  position: relative;
+  width: 100%; height: 100vh;
+  overflow: hidden;
+  display: flex; align-items: flex-end;
 }
 
-/* Gradient mesh background */
-.hero-mesh {
-  position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(ellipse 70% 60% at 80% 20%, rgba(184,245,102,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 10% 80%, rgba(110,181,255,0.06) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 60% 60%, rgba(255,107,157,0.05) 0%, transparent 50%);
-}
-
-/* Animated grid lines */
-.hero-grid {
-  position:absolute; inset:0; pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black, transparent);
-}
-
-/* ─── SNAKE GAME ─── */
-.snake-wrap {
-  position:absolute; top:0; bottom:0; right:0;
-  width:48%; display:flex; align-items:center; justify-content:center;
-  pointer-events:none; overflow:hidden;
-}
+/* Canvas fills entire hero */
 #snakeCanvas {
-  opacity:0.7;
-  image-rendering:pixelated;
-  border-radius:8px;
-  box-shadow:
-    0 0 0 1px rgba(184,245,102,0.07),
-    0 0 80px rgba(184,245,102,0.05),
-    inset 0 0 60px rgba(0,0,0,0.4);
-  background: rgba(6,10,8,0.75);
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  image-rendering: pixelated;
+  display: block;
 }
-.snake-score {
-  position:absolute; top:50%; right:3%;
-  transform:translateY(-50%);
-  font-family:'Courier New',monospace; font-size:10px;
-  color:rgba(184,245,102,0.3); letter-spacing:0.15em;
-  writing-mode:vertical-rl; text-transform:uppercase;
-  pointer-events:none; line-height:2.4;
+
+/* Gradient vignette so text stays readable */
+.hero-vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(6,6,10,0.96) 0%, rgba(6,6,10,0.4) 35%, transparent 60%),
+    linear-gradient(to right, rgba(6,6,10,0.5) 0%, transparent 40%);
+}
+
+/* All hero text — sits above canvas */
+.hero-content {
+  position: relative; z-index: 10;
+  width: 100%; padding: 0 56px 72px;
+  display: flex; flex-direction: column;
 }
 
 .hero-tag {
-  display:inline-flex; align-items:center; gap:10px;
-  font-size:11px; font-weight:600; letter-spacing:0.18em;
-  text-transform:uppercase; color:var(--accent);
-  margin-bottom:28px;
-  opacity:0; animation: slideUp 0.8s var(--ease-out) 0.2s forwards;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 20px;
+  opacity: 0; animation: slideUp 0.7s var(--ease-out) 0.3s forwards;
 }
-.hero-tag-line { width:28px; height:1px; background:var(--accent); }
+.hero-tag-line { width: 24px; height: 1px; background: var(--accent); flex-shrink:0; }
 
 h1.hero-title {
-  font-family:var(--font-display); font-weight:800;
-  font-size: clamp(72px, 10.5vw, 160px);
-  line-height:0.9; letter-spacing:-4px;
-  margin-bottom:48px;
-  opacity:0; animation: slideUp 0.9s var(--ease-out) 0.4s forwards;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(56px, 8.5vw, 128px);
+  line-height: 0.92; letter-spacing: -3px;
+  margin-bottom: 40px;
+  opacity: 0; animation: slideUp 0.8s var(--ease-out) 0.5s forwards;
 }
-.hero-title .dim { color:rgba(238,234,227,0.2); }
+.hero-title .dim { color: rgba(238,234,227,0.18); }
 .hero-title .outline {
-  color:transparent;
-  -webkit-text-stroke:1.5px var(--accent);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
   transition: color 0.3s, -webkit-text-stroke 0.3s;
 }
-.hero-title .outline:hover {
-  color:var(--accent);
-  -webkit-text-stroke:0px;
-}
+.hero-title .outline:hover { color: var(--accent); -webkit-text-stroke: 0px; }
 
 .hero-bottom {
-  display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
-  opacity:0; animation: slideUp 0.9s var(--ease-out) 0.6s forwards;
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 40px;
+  opacity: 0; animation: slideUp 0.8s var(--ease-out) 0.7s forwards;
 }
 .hero-desc {
-  max-width:460px; font-size:16px; line-height:1.75;
-  color:rgba(238,234,227,0.55);
+  max-width: 440px; font-size: 15px; line-height: 1.8;
+  color: rgba(238,234,227,0.5);
 }
-.hero-desc strong { color:var(--text); font-weight:500; }
+.hero-desc strong { color: var(--text); font-weight: 500; }
 
-.hero-right { display:flex; flex-direction:column; align-items:flex-end; gap:20px; }
+.hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
 
 .status-pill {
-  display:inline-flex; align-items:center; gap:10px;
-  padding:11px 20px;
-  background:rgba(184,245,102,0.06);
-  border:1px solid rgba(184,245,102,0.2);
-  border-radius:100px; font-size:12px; color:var(--text);
-  letter-spacing:0.03em;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+  background: rgba(184,245,102,0.06);
+  border: 1px solid rgba(184,245,102,0.18);
+  border-radius: 100px; font-size: 12px; color: var(--text);
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
 }
 .status-dot {
-  width:7px; height:7px; border-radius:50%;
-  background:var(--accent); box-shadow:0 0 10px var(--accent);
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 10px var(--accent);
   animation: breathe 2s ease-in-out infinite;
 }
 
-.scroll-hint {
-  display:flex; align-items:center; gap:12px;
-  font-size:11px; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--muted);
-}
-.scroll-track {
-  width:1px; height:56px;
-  background:linear-gradient(to bottom, var(--accent), transparent);
-  position:relative; overflow:hidden;
-}
-.scroll-track::after {
-  content:''; position:absolute; top:0; left:0; right:0;
-  height:50%; background:var(--bg);
-  animation: scanDown 2s ease-in-out infinite;
-}
-@keyframes scanDown {
-  0%{top:0}100%{top:100%}
+/* Milestone label shown from JS — bottom-centre */
+.hero-milestone {
+  position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
+  z-index: 11; pointer-events: none;
+  font-family: 'Courier New', monospace; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); opacity: 0;
+  transition: opacity 0.5s, color 0.5s;
+  white-space: nowrap;
+  text-shadow: 0 0 12px var(--accent);
 }
 
+.scroll-hint {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-track {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  position: relative; overflow: hidden;
+}
+.scroll-track::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 50%; background: var(--bg);
+  animation: scanDown 2s ease-in-out infinite;
+}
+@keyframes scanDown { 0%{top:0} 100%{top:100%} }
+
 @keyframes slideUp {
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
+  from { opacity:0; transform:translateY(36px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
 /* ─── MARQUEE ─── */
@@ -753,8 +741,9 @@ footer p { font-size:13px; color:var(--muted); }
   nav{padding:18px 24px}
   .nav-links{display:none}
   .section{padding:80px 24px}
-  .hero{padding:0 24px 64px}
-  .hero-bottom,.about-layout,.case-card,.exp-grid,.thinking-layout,.award-grid{grid-template-columns:1fr;gap:40px}
+  .hero-content{padding:0 24px 56px}
+  .hero-bottom{flex-direction:column;gap:24px;align-items:flex-start}
+  .about-layout,.case-card,.exp-grid,.thinking-layout,.award-grid{grid-template-columns:1fr;gap:40px}
   .testi-grid,.cap-grid{grid-template-columns:1fr}
   .case-visual{min-height:260px}
   .modal-stats{grid-template-columns:1fr 1fr}
@@ -781,38 +770,35 @@ footer p { font-size:13px; color:var(--muted); }
   <a href="/cdn-cgi/l/email-protection#acdfc4d5cdc2c5dccdc09c9aeccbc1cdc5c082cfc3c1" class="nav-cta">Let's talk →</a>
 </nav>
 
-<!-- HERO -->
+<!-- HERO — full viewport snake game -->
 <section class="hero">
-  <div class="hero-mesh"></div>
-  <div class="hero-grid"></div>
-  <div class="snake-wrap">
-    <canvas id="snakeCanvas"></canvas>
-    <div class="snake-score" id="snakeScore"></div>
-  </div>
+  <canvas id="snakeCanvas"></canvas>
+  <div class="hero-vignette"></div>
+  <div class="hero-milestone" id="heroMilestone"></div>
 
-  <div class="hero-tag">
-    <span class="hero-tag-line"></span>
-    Product Designer · 5+ Years
-  </div>
-
-  <h1 class="hero-title">
-    Designing<br>
-    <span class="dim">products</span><br>
-    <span class="outline">feel alive</span>
-  </h1>
-
-  <div class="hero-bottom">
-    <p class="hero-desc">
-      From <strong>fintech to connected mobility</strong>, I craft native mobile experiences that balance precision engineering with human intuition. Currently shaping <strong>in-vehicle UX at Mercedes-Benz</strong>.
-    </p>
-    <div class="hero-right">
-      <div class="status-pill">
-        <div class="status-dot"></div>
-        Available for senior roles · Global teams welcome
-      </div>
-      <div class="scroll-hint">
-        <div class="scroll-track"></div>
-        Scroll
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-line"></span>
+      Product Designer · 5+ Years
+    </div>
+    <h1 class="hero-title">
+      Designing<br>
+      <span class="dim">products</span><br>
+      <span class="outline">feel alive</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        From <strong>fintech to connected mobility</strong>, I craft native mobile experiences where engineering precision meets human intuition. Currently at <strong>Mercedes-Benz R&D</strong>.
+      </p>
+      <div class="hero-right">
+        <div class="status-pill">
+          <div class="status-dot"></div>
+          Available for senior roles · Global teams welcome
+        </div>
+        <div class="scroll-hint">
+          <div class="scroll-track"></div>
+          Scroll
+        </div>
       </div>
     </div>
   </div>
@@ -1292,181 +1278,263 @@ expNavItems.forEach(item => {
   });
 });
 
-// ─── NOKIA SNAKE ───────────────────────────────────────
+
+// ─── NOKIA SNAKE — Full Viewport Hero ─────────────────────
 (function() {
   const canvas = document.getElementById('snakeCanvas');
   if (!canvas) return;
-  const CELL=14, COLS=24, ROWS=28;
-  const W=COLS*CELL, H=ROWS*CELL;
-  canvas.width=W; canvas.height=H;
-  const ctx = canvas.getContext('2d');
+  const milestoneEl = document.getElementById('heroMilestone');
 
-  const LETTERS = {
-    'U':[1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0],
-    'X':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,1],
-    'F':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0],
-    'Y':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
-    'L':[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,1,1,1],
-    'E':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,1,1,1,1],
-    'I':[0,1,1,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,1,0],
-    'N':[1,0,0,0,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,1,1,0,0,0,1],
-    'T':[1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
-    'C':[0,1,1,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1,1,0],
-    'H':[1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1],
+  const CELL = 18; // bigger cells on full viewport
+  let COLS, ROWS, W, H;
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    COLS = Math.floor(W / CELL);
+    ROWS = Math.floor(H / CELL);
+    canvas.width  = W;
+    canvas.height = H;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); init(); });
+
+  // 5×5 pixel font
+  const FONT = {
     'A':[0,1,1,1,0,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1],
+    'B':[1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,0,0,1,1,1,1,1,0],
+    'C':[0,1,1,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1,1,0],
+    'D':[1,1,1,0,0,1,0,0,1,0,1,0,0,0,1,1,0,0,1,0,1,1,1,0,0],
+    'E':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,1,1,1,1],
+    'F':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0],
     'G':[0,1,1,1,0,1,0,0,0,0,1,0,1,1,1,1,0,0,0,1,0,1,1,1,0],
+    'H':[1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1],
+    'I':[0,1,1,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,1,0],
+    'L':[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,1,1,1],
+    'M':[1,0,0,0,1,1,1,0,1,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,1],
+    'N':[1,0,0,0,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,1,1,0,0,0,1],
     'O':[0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0],
-    'S':[0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0],
     'P':[1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0],
     'R':[1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,1,0,0,1,0,0,1,0],
-    'D':[1,1,1,0,0,1,0,0,1,0,1,0,0,0,1,1,0,0,1,0,1,1,1,0,0],
-    'B':[1,1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,0,0,1,1,1,1,1,0],
-    'M':[1,0,0,0,1,1,1,0,1,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,1],
+    'S':[0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0],
+    'T':[1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
+    'U':[1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0],
+    'X':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,1],
+    'Y':[1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
     'Z':[1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1],
-    'W':[1,0,0,0,1,1,0,0,0,1,1,0,1,0,1,1,1,0,1,1,1,0,0,0,1],
-    'V':[1,0,0,0,1,1,0,0,0,1,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0],
-    'K':[1,0,0,1,0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0,1,0,0,1,0],
   };
 
-  const MILESTONES = ['UX','FYLE','FLITS','CRAFT','MOBILE','DESIGN','MERCEDES','HOSAKSHAM'];
-  let mIdx=0, snake, dir, nextDir, foodCells, eatenCells, score, frame, gameOver;
+  const JOURNEY = [
+    { word:'UX',     label:'The Beginning',         color:'#b8f566' },
+    { word:'DESIGN', label:'Found the Craft',        color:'#b8f566' },
+    { word:'MOBILE', label:'Native & Proud',         color:'#6eb5ff' },
+    { word:'FYLE',   label:'Fintech · Acquired',     color:'#ff6b9d' },
+    { word:'FLITS',  label:'Shopify Scale',          color:'#a78bfa' },
+    { word:'MOTION', label:'Alive Interactions',     color:'#6eb5ff' },
+    { word:'BENZ',   label:'Mercedes · Now',         color:'#b8f566' },
+  ];
+
+  const ctx = canvas.getContext('2d');
+  let mIdx=0, snake, dir, nextDir;
+  let foodCells, eatenCells, frame, gameOver;
+  let restartTimer=null, flashCells=[];
+  let currentColor='#b8f566';
+  let labelFadeTimer=null;
 
   function letterCells(ch, ox, oy) {
-    const m = LETTERS[ch]; if(!m) return [];
+    const m=FONT[ch]; if(!m) return [];
     const out=[];
     for(let r=0;r<5;r++) for(let c=0;c<5;c++) if(m[r*5+c]) out.push({x:ox+c,y:oy+r});
     return out;
   }
 
   function wordCells(word) {
-    const tw = word.length*6-1;
-    const sx = Math.floor((COLS-tw)/2);
-    const sy = Math.floor((ROWS-5)/2)-2;
+    const charW=6, totalW=word.length*charW-1;
+    // Place letters in upper-centre of viewport
+    const sx=Math.floor((COLS-totalW)/2);
+    const sy=Math.floor(ROWS*0.28);
     let cells=[];
-    for(let i=0;i<word.length;i++) cells=cells.concat(letterCells(word[i],sx+i*6,sy));
+    for(let i=0;i<word.length;i++) cells=cells.concat(letterCells(word[i],sx+i*charW,sy));
     return cells.filter(c=>c.x>=0&&c.x<COLS&&c.y>=0&&c.y<ROWS);
   }
 
   function has(arr,x,y){ return arr.some(s=>s.x===x&&s.y===y); }
 
+  function showMilestone(m) {
+    if(!milestoneEl) return;
+    milestoneEl.textContent = m.label;
+    milestoneEl.style.color = m.color;
+    milestoneEl.style.textShadow = `0 0 16px ${m.color}`;
+    milestoneEl.style.opacity = '1';
+    if(labelFadeTimer) clearTimeout(labelFadeTimer);
+    labelFadeTimer = setTimeout(()=>{ milestoneEl.style.opacity='0'; }, 2200);
+  }
+
   function init() {
     snake=[];
-    for(let i=7;i>=0;i--) snake.push({x:i,y:Math.floor(ROWS/2)});
+    const sy=Math.floor(ROWS*0.65);
+    const sx=Math.floor(COLS*0.15);
+    for(let i=7;i>=0;i--) snake.push({x:sx+i,y:sy});
     dir={x:1,y:0}; nextDir={x:1,y:0};
-    score=0; frame=0; gameOver=false; eatenCells=[];
+    frame=0; gameOver=false; eatenCells=[]; flashCells=[];
     mIdx=0; loadWord();
   }
 
   function loadWord() {
-    const word = MILESTONES[mIdx % MILESTONES.length]; mIdx++;
-    foodCells = wordCells(word).filter(f=>!has(snake,f.x,f.y));
+    const m=JOURNEY[mIdx%JOURNEY.length];
+    currentColor=m.color;
+    showMilestone(m);
+    foodCells=wordCells(m.word).filter(f=>!has(snake,f.x,f.y));
+    mIdx++;
   }
 
   function step() {
     dir=nextDir;
-    const h={x:(snake[0].x+dir.x+COLS)%COLS, y:(snake[0].y+dir.y+ROWS)%ROWS};
-    if(has(snake,h.x,h.y)){ gameOver=true; setTimeout(()=>{eatenCells=[];init();},900); return; }
+    const h={
+      x:(snake[0].x+dir.x+COLS)%COLS,
+      y:(snake[0].y+dir.y+ROWS)%ROWS
+    };
+    if(has(snake.slice(0,-1),h.x,h.y)){
+      gameOver=true;
+      if(!restartTimer) restartTimer=setTimeout(()=>{
+        restartTimer=null; eatenCells=[]; flashCells=[]; init();
+      },1000);
+      return;
+    }
     snake.unshift(h);
-    const f=foodCells[0];
-    let ate=false;
+    const f=foodCells[0]; let ate=false;
     if(f&&h.x===f.x&&h.y===f.y){
-      ate=true; eatenCells.push({x:f.x,y:f.y}); foodCells.shift(); score++;
-      if(foodCells.length===0) setTimeout(()=>{ eatenCells=[]; loadWord(); score=0; },500);
+      ate=true;
+      eatenCells.push({x:f.x,y:f.y,age:0});
+      foodCells.shift();
+      if(foodCells.length===0){
+        flashCells=[...eatenCells];
+        setTimeout(()=>{ eatenCells=[]; flashCells=[]; loadWord(); },700);
+      }
     }
     if(!ate) snake.pop();
 
-    // AI steer
+    // AI: greedy toward next food
     const target=foodCells[0];
     if(target){
-      const hd=snake[0];
-      const cands=[
-        {x:1,y:0},{x:-1,y:0},{x:0,y:1},{x:0,y:-1}
-      ].filter(d=>!(d.x===-dir.x&&d.y===-dir.y)).filter(d=>{
-        const nx=(hd.x+d.x+COLS)%COLS, ny=(hd.y+d.y+ROWS)%ROWS;
-        return !has(snake.slice(0,-1),nx,ny);
-      });
-      if(cands.length){
-        cands.sort((a,b)=>{
-          const da=Math.abs((hd.x+a.x)-target.x)+Math.abs((hd.y+a.y)-target.y);
-          const db=Math.abs((hd.x+b.x)-target.x)+Math.abs((hd.y+b.y)-target.y);
+      const head=snake[0];
+      const safe=[{x:1,y:0},{x:-1,y:0},{x:0,y:1},{x:0,y:-1}]
+        .filter(d=>!(d.x===-dir.x&&d.y===-dir.y))
+        .filter(d=>!has(snake.slice(0,-1),(head.x+d.x+COLS)%COLS,(head.y+d.y+ROWS)%ROWS));
+      if(safe.length){
+        safe.sort((a,b)=>{
+          const da=Math.abs((head.x+a.x)-target.x)+Math.abs((head.y+a.y)-target.y);
+          const db=Math.abs((head.x+b.x)-target.x)+Math.abs((head.y+b.y)-target.y);
           return da-db;
         });
-        nextDir=cands[0];
+        nextDir=safe[0];
       }
     }
   }
 
+  function hexRgb(h){
+    return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)].join(',');
+  }
+
   function draw() {
     ctx.clearRect(0,0,W,H);
-    ctx.fillStyle='#06080a'; ctx.fillRect(0,0,W,H);
 
-    // Grid
-    ctx.fillStyle='rgba(184,245,102,0.03)';
+    // Deep dark background
+    ctx.fillStyle='#050709';
+    ctx.fillRect(0,0,W,H);
+
+    // Scanline overlay — subtle Nokia feel
+    for(let y=0;y<H;y+=4){
+      ctx.fillStyle='rgba(0,0,0,0.1)';
+      ctx.fillRect(0,y,W,1);
+    }
+
+    // Dot grid — very subtle
+    ctx.fillStyle=`rgba(${hexRgb(currentColor)},0.035)`;
     for(let x=0;x<COLS;x++) for(let y=0;y<ROWS;y++)
-      ctx.fillRect(x*CELL+CELL/2-0.5,y*CELL+CELL/2-0.5,1,1);
+      ctx.fillRect(x*CELL+CELL/2-0.5, y*CELL+CELL/2-0.5, 1,1);
 
-    // Eaten glow
-    eatenCells.forEach(c=>{
-      ctx.fillStyle='rgba(184,245,102,0.1)';
+    // Flash celebration when word complete
+    const fp=0.4+0.6*Math.abs(Math.sin(frame*0.4));
+    flashCells.forEach(c=>{
+      ctx.fillStyle=`rgba(${hexRgb(currentColor)},${0.22*fp})`;
       ctx.fillRect(c.x*CELL,c.y*CELL,CELL,CELL);
     });
 
-    // Food letter cells
-    const next=foodCells[0];
+    // Eaten trail
+    eatenCells.forEach(c=>{
+      c.age=(c.age||0)+1;
+      const fade=Math.max(0,1-c.age/180);
+      ctx.fillStyle=`rgba(${hexRgb(currentColor)},${0.1*fade})`;
+      ctx.fillRect(c.x*CELL,c.y*CELL,CELL,CELL);
+    });
+
+    // Food cells (letter pixels)
+    const nf=foodCells[0];
+    const pw=CELL*0.42; // pixel dot size
     foodCells.forEach(c=>{
-      const isN=next&&c.x===next.x&&c.y===next.y;
-      if(isN){
-        const p=0.5+0.5*Math.sin(frame*0.2);
-        ctx.fillStyle=`rgba(255,107,157,${0.55+0.45*p})`;
-        ctx.shadowColor='rgba(255,107,157,0.5)'; ctx.shadowBlur=8*p;
-        ctx.beginPath(); ctx.roundRect(c.x*CELL+2,c.y*CELL+2,CELL-4,CELL-4,2); ctx.fill();
+      const isNext=nf&&c.x===nf.x&&c.y===nf.y;
+      const cx=c.x*CELL+CELL/2, cy=c.y*CELL+CELL/2;
+      if(isNext){
+        const pulse=0.5+0.5*Math.sin(frame*0.18);
+        ctx.shadowColor=`rgba(${hexRgb(currentColor)},0.9)`;
+        ctx.shadowBlur=8+6*pulse;
+        ctx.fillStyle=`rgba(${hexRgb(currentColor)},${0.55+0.4*pulse})`;
+        ctx.beginPath();
+        ctx.roundRect(cx-pw/2,cy-pw/2,pw,pw,2);
+        ctx.fill();
         ctx.shadowBlur=0;
       } else {
-        ctx.fillStyle='rgba(184,245,102,0.14)';
-        ctx.fillRect(c.x*CELL+4,c.y*CELL+4,CELL-8,CELL-8);
+        ctx.fillStyle=`rgba(${hexRgb(currentColor)},0.2)`;
+        const s=pw*0.7;
+        ctx.fillRect(cx-s/2,cy-s/2,s,s);
       }
     });
 
     // Snake
     snake.forEach((seg,i)=>{
+      const fade=Math.max(0.12,1-i/snake.length*0.75);
       if(i===0){
-        ctx.fillStyle='#d4ff7a';
-        ctx.beginPath(); ctx.roundRect(seg.x*CELL+1,seg.y*CELL+1,CELL-2,CELL-2,3); ctx.fill();
-        ctx.fillStyle='#06080a';
-        const eo=CELL*0.22, es=2;
+        // Head glow
+        ctx.shadowColor=`rgba(${hexRgb(currentColor)},1)`;
+        ctx.shadowBlur=16;
+        ctx.fillStyle=currentColor;
+        const s=CELL-2;
+        ctx.beginPath();
+        ctx.roundRect(seg.x*CELL+1,seg.y*CELL+1,s,s,4);
+        ctx.fill();
+        ctx.shadowBlur=0;
+        // Eyes
+        ctx.fillStyle='rgba(5,7,9,0.9)';
+        const ex=seg.x*CELL+CELL/2, ey=seg.y*CELL+CELL/2;
+        const ed=CELL*0.22, er=CELL*0.1;
         const px=dir.y, py=-dir.x;
-        ctx.fillRect(seg.x*CELL+CELL/2+dir.x*eo+px*eo-es/2, seg.y*CELL+CELL/2+dir.y*eo+py*eo-es/2,es,es);
-        ctx.fillRect(seg.x*CELL+CELL/2+dir.x*eo-px*eo-es/2, seg.y*CELL+CELL/2+dir.y*eo-py*eo-es/2,es,es);
+        ctx.beginPath(); ctx.arc(ex+dir.x*ed+px*ed, ey+dir.y*ed+py*ed, er,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(ex+dir.x*ed-px*ed, ey+dir.y*ed-py*ed, er,0,Math.PI*2); ctx.fill();
       } else {
-        const t=i/snake.length;
-        ctx.globalAlpha=Math.max(0.3,1-t*0.55);
-        ctx.fillStyle=i%2===0?'#b8f566':'#8bc34a';
-        const ins=1+t*1.5;
-        ctx.beginPath(); ctx.roundRect(seg.x*CELL+ins,seg.y*CELL+ins,CELL-ins*2,CELL-ins*2,2); ctx.fill();
+        ctx.globalAlpha=fade;
+        const ins=1+i/snake.length*3;
+        ctx.fillStyle=i%2===0?currentColor:'rgba(255,255,255,0.15)';
+        ctx.beginPath();
+        ctx.roundRect(seg.x*CELL+ins,seg.y*CELL+ins,CELL-ins*2,CELL-ins*2,2);
+        ctx.fill();
         ctx.globalAlpha=1;
       }
     });
 
-    // Word label
-    const word=MILESTONES[(mIdx-1)%MILESTONES.length];
-    ctx.font="bold 8px 'Courier New',monospace";
-    ctx.fillStyle='rgba(184,245,102,0.22)';
-    ctx.textAlign='center';
-    ctx.fillText(word, W/2, 11);
-
+    // Game over dim
     if(gameOver){
-      ctx.fillStyle='rgba(6,8,10,0.75)'; ctx.fillRect(0,0,W,H);
-      ctx.font="bold 9px 'Courier New'"; ctx.fillStyle='rgba(184,245,102,0.6)';
-      ctx.textAlign='center'; ctx.fillText('RESTARTING...',W/2,H/2);
+      ctx.fillStyle='rgba(5,7,9,0.7)'; ctx.fillRect(0,0,W,H);
     }
   }
 
   function loop(){
     frame++;
-    if(!gameOver && frame%7===0) step();
+    if(!gameOver&&frame%4===0) step(); // slightly faster on big screen
     draw();
     requestAnimationFrame(loop);
   }
+
   init(); loop();
 })();
 </script>
