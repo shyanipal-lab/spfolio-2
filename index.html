@@ -347,9 +347,76 @@ nav.scrolled {
   justify-content:center; overflow:hidden; min-height:460px;
 }
 .vis-hosaksham {
-  background:radial-gradient(ellipse 80% 80% at 60% 40%, rgba(184,245,102,0.08) 0%, transparent 70%),
-             linear-gradient(135deg,#07140f 0%,#0d1f19 100%);
+  background: radial-gradient(ellipse at 20% 20%, rgba(45,78,245,0.2) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(45,78,245,0.1) 0%, transparent 50%),
+              #1a1a2e;
+  display:flex; align-items:center; justify-content:center;
 }
+
+/* ── HS DASHBOARD ── */
+.hs-phone-wrap {
+  width:220px; height:476px;
+  background:#000; border-radius:32px; position:relative; overflow:hidden;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 40px 80px rgba(0,0,0,.7), 0 0 30px rgba(45,78,245,.2);
+  flex-shrink:0;
+}
+.hs-island {
+  position:absolute; top:10px; left:50%; transform:translateX(-50%);
+  width:72px; height:22px; background:#000; border-radius:14px; z-index:10;
+  box-shadow:0 0 0 1px rgba(255,255,255,.05);
+}
+.hs-screen {
+  position:absolute; inset:0; background:#000; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+.hs-status {
+  padding:32px 16px 4px; display:flex; justify-content:space-between; align-items:flex-end; flex-shrink:0;
+}
+.hs-time { font-size:10px; font-weight:600; color:white; }
+.hs-topnav {
+  padding:4px 14px 8px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+  animation:hsFadeUp .6s .1s cubic-bezier(.34,1.2,.64,1) forwards; opacity:0; transform:translateY(-12px);
+}
+.hs-balance {
+  padding:0 14px 6px; flex-shrink:0;
+  animation:hsFadeUp .7s .2s cubic-bezier(.34,1.2,.64,1) forwards; opacity:0; transform:translateY(16px);
+}
+.hs-bars {
+  display:flex; align-items:flex-end; gap:2px; height:20px; margin-top:6px;
+}
+.hs-bar {
+  flex:1; border-radius:2px 2px 0 0; background:rgba(45,78,245,.25);
+  transform-origin:bottom; animation:hsBarGrow .5s ease forwards; transform:scaleY(0);
+}
+.hs-bar-active { background:#2d4ef5; }
+@keyframes hsBarGrow { to { transform:scaleY(1); } }
+.hs-card {
+  margin:0 10px 0; background:#D8DFE9; border-radius:18px; padding:12px; flex-shrink:0;
+}
+.hs-card-anim { animation:hsCardSlide .7s cubic-bezier(.34,1.2,.64,1) forwards; opacity:0; transform:translateY(20px) scale(.97); }
+@keyframes hsCardSlide { to { opacity:1; transform:translateY(0) scale(1); } }
+.hs-progress {
+  height:100%; border-radius:3px;
+  background:linear-gradient(90deg,#2d4ef5,#6c8fff);
+  width:0%; animation:hsProgGrow 1.2s .9s cubic-bezier(.34,1,.64,1) forwards;
+}
+@keyframes hsProgGrow { to { width:68%; } }
+.hs-prow {
+  display:flex; align-items:center; gap:7px; padding:6px 0;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  animation:hsRowIn .4s forwards; opacity:0;
+}
+@keyframes hsRowIn { from{opacity:0;transform:translateX(-6px)} to{opacity:1;transform:translateX(0)} }
+.hs-amt { font-size:9px; font-weight:600; animation:hsAmtFlash .4s forwards; opacity:0; }
+@keyframes hsAmtFlash { 0%{opacity:0;transform:scale(.8)} 60%{opacity:1;transform:scale(1.05)} 100%{opacity:1;transform:scale(1)} }
+.hs-paid { color:#16a34a; } .hs-due { color:#dc2626; }
+.hs-bottomnav {
+  margin:auto 10px 10px; background:rgba(255,255,255,.07); border-radius:26px;
+  border:1px solid rgba(255,255,255,.08); backdrop-filter:blur(16px);
+  display:flex; align-items:center; justify-content:space-around; padding:6px 4px;
+  animation:hsFadeUp .7s .6s cubic-bezier(.34,1.2,.64,1) forwards; opacity:0; transform:translateY(14px);
+}
+@keyframes hsFadeUp { to { opacity:1; transform:translateY(0); } }
 .vis-fyle {
   background:radial-gradient(ellipse 80% 80% at 40% 60%, rgba(255,107,157,0.08) 0%, transparent 70%),
              linear-gradient(135deg,#14070f 0%,#1f0d1a 100%);
@@ -1310,6 +1377,50 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 });
+
+// ── HoSaksham Dashboard ──
+(function(){
+  // Live clock
+  function hsUpdateClock(){
+    const now=new Date();
+    const el=document.getElementById('hsClock');
+    if(el) el.textContent=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  }
+  hsUpdateClock(); setInterval(hsUpdateClock,10000);
+
+  // Count up
+  function hsCountUp(el,target,duration){
+    if(!el) return;
+    const start=performance.now();
+    const update=(now)=>{
+      const p=Math.min((now-start)/duration,1);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=Math.floor(eased*target).toLocaleString('en-IN');
+      if(p<1) requestAnimationFrame(update);
+      else el.textContent=target.toLocaleString('en-IN');
+    };
+    requestAnimationFrame(update);
+  }
+
+  // Trigger when card scrolls into view
+  const hsCard = document.querySelector('.vis-hosaksham');
+  let hsFired = false;
+  if(hsCard){
+    const hsObs = new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting && !hsFired){
+        hsFired=true;
+        setTimeout(()=>hsCountUp(document.getElementById('hsCounter'),86420,1400),400);
+        setTimeout(()=>hsCountUp(document.getElementById('hsSubCounter'),27,900),550);
+        // Periodic payment pulse
+        setInterval(()=>{
+          const rows=document.querySelectorAll('.hs-prow');
+          if(rows[0]){rows[0].style.background='rgba(34,197,94,.08)';setTimeout(()=>{rows[0].style.background=''},700);}
+        },4000);
+      }
+    },{threshold:0.3});
+    hsObs.observe(hsCard);
+  }
+})();
 
 // Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
