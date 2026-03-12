@@ -925,32 +925,105 @@ footer p { font-size:13px; color:var(--muted); }
           <div class="metric"><span class="metric-val mv-green">3mo</span><span class="metric-lbl">Discovery to ship</span></div>
         </div>
       </div>
-      <div class="case-visual vis-hosaksham">
-        <div class="phone2">
-          <div class="phone-bar"></div>
-          <div class="p-row lo"></div>
-          <div class="p-row lo w7"></div>
-          <div class="p-row lo w5"></div>
-          <div class="p-row lo"></div>
-          <div class="p-row lo w7"></div>
-        </div>
-        <div class="phone">
-          <div class="phone-bar"></div>
-          <div class="p-row hi"></div>
-          <div class="p-row lo w7"></div>
-          <div class="p-row lo w5"></div>
-          <div class="p-card">
-            <div class="p-row hi" style="margin-bottom:6px"></div>
-            <div class="p-row lo w9"></div>
-            <div class="p-row lo w7"></div>
+      <div class="case-visual vis-hosaksham" style="display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;">
+        <div class="hs-phone-wrap">
+          <!-- Dynamic Island -->
+          <div class="hs-island"></div>
+          <div class="hs-screen">
+            <!-- Status Bar -->
+            <div class="hs-status">
+              <span class="hs-time" id="hsClock">9:41</span>
+              <div style="display:flex;align-items:center;gap:4px;">
+                <svg width="14" height="10" viewBox="0 0 17 12" fill="none"><rect x="0" y="6" width="3" height="6" rx="1" fill="white"/><rect x="4.5" y="4" width="3" height="8" rx="1" fill="white"/><rect x="9" y="2" width="3" height="10" rx="1" fill="white"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="white"/></svg>
+                <svg width="20" height="10" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="white"/></svg>
+              </div>
+            </div>
+            <!-- Top nav -->
+            <div class="hs-topnav">
+              <div style="display:flex;flex-direction:column;gap:3px;"><span style="display:block;width:18px;height:1.5px;background:white;"></span><span style="display:block;width:12px;height:1.5px;background:white;"></span><span style="display:block;width:18px;height:1.5px;background:white;"></span></div>
+              <span style="font-family:'DM Serif Display',serif;font-size:16px;color:white;letter-spacing:-.02em;">saksham</span>
+              <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#4f7cff,#2d4ef5);border:2px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:9px;color:white;font-weight:600;position:relative;">AJ<div style="position:absolute;bottom:0;right:0;width:6px;height:6px;border-radius:50%;background:#22c55e;border:1.5px solid #000;"></div></div>
+            </div>
+            <!-- Balance -->
+            <div class="hs-balance">
+              <div style="font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:3px;">Total Collection</div>
+              <div style="font-family:'DM Serif Display',serif;font-size:30px;color:white;letter-spacing:-.03em;line-height:1;display:flex;align-items:baseline;gap:3px;"><span style="font-size:16px;opacity:.7;">₹</span><span id="hsCounter">0</span></div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:4px;font-size:8px;color:rgba(255,255,255,.4);">
+                <span style="background:rgba(34,197,94,.15);color:#4ade80;padding:2px 5px;border-radius:20px;font-size:8px;font-weight:600;">↑ 12.4%</span>
+                <span>vs last month</span>
+              </div>
+              <!-- Mini bars -->
+              <div class="hs-bars">
+                <div class="hs-bar" style="height:40%;animation-delay:1.0s;"></div>
+                <div class="hs-bar" style="height:60%;animation-delay:1.05s;"></div>
+                <div class="hs-bar" style="height:35%;animation-delay:1.1s;"></div>
+                <div class="hs-bar" style="height:80%;animation-delay:1.15s;"></div>
+                <div class="hs-bar" style="height:55%;animation-delay:1.2s;"></div>
+                <div class="hs-bar hs-bar-active" style="height:90%;animation-delay:1.25s;"></div>
+                <div class="hs-bar" style="height:45%;animation-delay:1.3s;"></div>
+              </div>
+            </div>
+            <!-- Pills -->
+            <div style="display:flex;gap:6px;padding:0 14px;margin-bottom:8px;">
+              <div style="padding:4px 10px;border-radius:20px;font-size:7.5px;font-weight:500;background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.2);">All</div>
+              <div style="padding:4px 10px;border-radius:20px;font-size:7.5px;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08);">This Month</div>
+              <div style="padding:4px 10px;border-radius:20px;font-size:7.5px;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08);">Pending</div>
+            </div>
+            <!-- Subscribers card -->
+            <div class="hs-card hs-card-anim" style="animation-delay:.35s;">
+              <div style="display:flex;align-items:center;margin-bottom:8px;">
+                <div style="display:flex;">
+                  <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);border:2px solid #D8DFE9;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:600;">AK</div>
+                  <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#f093fb,#f5576c);border:2px solid #D8DFE9;margin-left:-6px;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:600;">SR</div>
+                  <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#4facfe,#00f2fe);border:2px solid #D8DFE9;margin-left:-6px;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:600;">MV</div>
+                  <div style="width:24px;height:24px;border-radius:50%;background:#D8DFE9;border:2px solid rgba(0,0,0,.08);margin-left:-6px;display:flex;align-items:center;justify-content:center;font-size:7.5px;color:rgba(0,0,0,.5);font-weight:600;">+24</div>
+                </div>
+              </div>
+              <div style="font-size:7.5px;color:rgba(0,0,0,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;">Active Subscribers</div>
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:#0f0f0f;letter-spacing:-.02em;line-height:1;margin-bottom:6px;" id="hsSubCounter">0</div>
+              <div style="height:3px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;margin-bottom:6px;"><div class="hs-progress"></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:7px;color:rgba(0,0,0,.4);">18 pending renewal</span>
+                <span style="background:#0f0f0f;color:white;font-size:7px;padding:4px 10px;border-radius:20px;">Manage →</span>
+              </div>
+            </div>
+            <!-- Payments card -->
+            <div class="hs-card hs-card-anim" style="margin-top:8px;animation-delay:.5s;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-size:7.5px;color:rgba(0,0,0,.45);letter-spacing:.1em;text-transform:uppercase;">Recent Collections</span>
+                <div style="display:flex;gap:2px;">
+                  <div style="width:3px;height:3px;border-radius:50%;background:rgba(0,0,0,.3);"></div>
+                  <div style="width:3px;height:3px;border-radius:50%;background:rgba(0,0,0,.3);"></div>
+                  <div style="width:3px;height:3px;border-radius:50%;background:rgba(0,0,0,.3);"></div>
+                </div>
+              </div>
+              <div class="hs-prow" style="animation-delay:.7s;"><div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:600;flex-shrink:0;">AK</div><div style="flex:1;"><div style="font-size:9px;font-weight:500;color:#0f0f0f;">Arjun Kumar</div><div style="font-size:7px;color:rgba(0,0,0,.35);">Today, 9:21 AM</div></div><div class="hs-amt hs-paid" style="animation-delay:.75s;">+₹1,200</div></div>
+              <div class="hs-prow" style="animation-delay:.85s;"><div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:600;flex-shrink:0;">SR</div><div style="flex:1;"><div style="font-size:9px;font-weight:500;color:#0f0f0f;">Sunita Rao</div><div style="font-size:7px;color:rgba(0,0,0,.35);">Yesterday, 6:45 PM</div></div><div class="hs-amt hs-paid" style="animation-delay:.9s;">+₹850</div></div>
+              <div class="hs-prow" style="animation-delay:1.0s;border-bottom:none;"><div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f7971e,#ffd200);display:flex;align-items:center;justify-content:center;font-size:8px;color:white;font-weight:600;flex-shrink:0;">MV</div><div style="flex:1;"><div style="font-size:9px;font-weight:500;color:#0f0f0f;">Mohan Verma</div><div style="font-size:7px;color:rgba(0,0,0,.35);">Due today</div></div><div class="hs-amt hs-due" style="animation-delay:1.05s;">₹600</div></div>
+            </div>
+            <!-- Bottom nav -->
+            <div class="hs-bottomnav">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;border-radius:20px;background:rgba(255,255,255,.1);">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M3 9.5L12 3L21 9.5V20a1 1 0 01-1 1H15v-6H9v6H4a1 1 0 01-1-1V9.5z" fill="white"/></svg>
+                <span style="font-size:6px;color:rgba(255,255,255,.9);">Home</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" stroke="white" stroke-width="1.5"/><path d="M3 20c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M16 11a3 3 0 100-6M21 20c0-2.761-2.239-5-5-5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span style="font-size:6px;color:rgba(255,255,255,.4);">Members</span>
+              </div>
+              <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#4f7cff,#2d4ef5);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(45,78,245,.5);">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2" stroke="white" stroke-width="1.5"/><path d="M3 10h18" stroke="white" stroke-width="1.5"/></svg>
+                <span style="font-size:6px;color:rgba(255,255,255,.4);">Payments</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke="white" stroke-width="1.5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span style="font-size:6px;color:rgba(255,255,255,.4);">Settings</span>
+              </div>
+            </div>
           </div>
-          <div class="p-card">
-            <div class="p-row hi" style="margin-bottom:6px"></div>
-            <div class="p-row lo w5"></div>
-          </div>
-          <div class="p-row lo w9"></div>
-          <div class="p-row lo"></div>
-          <div class="phone-glow"></div>
         </div>
       </div>
     </div>
