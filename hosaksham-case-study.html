@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoSaksham — Case Study · Shyani Pal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#06060a; --surface:#0e0e14; --surface2:#16161f;
+  --border:rgba(255,255,255,0.06); --bh:rgba(255,255,255,0.13);
+  --text:#eeeae3; --muted:#555566; --muted2:#888899;
+  --accent:#b8f566; --ag:rgba(184,245,102,0.25); --ad:rgba(184,245,102,0.1);
+  --pink:#ff6b9d; --pd:rgba(255,107,157,0.1);
+  --blue:#6eb5ff; --bd:rgba(110,181,255,0.1);
+  --purple:#a78bfa; --pud:rgba(167,139,250,0.1);
+  --D:'Syne',sans-serif; --B:'DM Sans',sans-serif;
+  --out:cubic-bezier(0.16,1,0.3,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-weight:300;line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:3px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:20px 56px;display:flex;justify-content:space-between;align-items:center;transition:background .4s}
+nav.sc{background:rgba(6,6,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--D);font-weight:800;font-size:17px;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:br 3s ease-in-out infinite}
+@keyframes br{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
+.back{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:7px}
+.back:hover{color:var(--accent)} .back:hover svg{transform:translateX(-3px)} .back svg{transition:transform .2s}
+.ncta{font-size:12px;font-weight:600;color:var(--bg);background:var(--accent);padding:10px 22px;border-radius:100px;text-decoration:none;transition:all .25s}
+.ncta:hover{transform:translateY(-1px);box-shadow:0 8px 24px var(--ag)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 56px 80px;position:relative;overflow:hidden}
+.hbg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 70% 10%,rgba(184,245,102,.08) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 10% 70%,rgba(110,181,255,.05) 0%,transparent 55%)}
+.hgrid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 90% 70% at 50% 50%,black,transparent)}
+.bc{font-family:'Courier New',monospace;font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:su .6s var(--out) .2s forwards}
+.htag{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;opacity:0;animation:su .6s var(--out) .3s forwards}
+.tline{width:24px;height:1px;background:var(--accent)}
+h1{font-family:var(--D);font-weight:800;font-size:clamp(56px,9vw,136px);line-height:.9;letter-spacing:-4px;margin-bottom:40px;opacity:0;animation:su .7s var(--out) .4s forwards}
+h1 .ol{color:transparent;-webkit-text-stroke:1.5px var(--accent)}
+.hbot{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;opacity:0;animation:su .7s var(--out) .5s forwards}
+.hdesc{max-width:460px;font-size:17px;line-height:1.8;color:rgba(238,234,227,.55)}
+.hdesc strong{color:var(--text);font-weight:500}
+.hacts{display:flex;flex-direction:column;align-items:flex-end;gap:12px;flex-shrink:0}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;font-size:11px;color:var(--muted2);background:var(--surface);white-space:nowrap}
+.pdot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.live{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:var(--ad);border:1px solid rgba(184,245,102,.25);border-radius:100px;font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;letter-spacing:.05em;transition:all .25s}
+.live:hover{background:var(--accent);color:var(--bg);box-shadow:0 8px 24px var(--ag)}
+.live:hover svg{transform:translate(2px,-2px)} .live svg{transition:transform .2s}
+@keyframes su{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface)}
+.st{padding:26px 32px;border-right:1px solid var(--border);transition:background .3s}
+.st:last-child{border-right:none} .st:hover{background:var(--surface2)}
+.sv{font-family:var(--D);font-size:30px;font-weight:800;letter-spacing:-1.5px;color:var(--accent);line-height:1;margin-bottom:4px}
+.sl{font-size:11px;color:var(--muted2)}
+
+/* BODY */
+.body{max-width:1160px;margin:0 auto;padding:0 56px}
+.sec{padding:80px 0;border-bottom:1px solid var(--border)}
+.sec:last-child{border-bottom:none}
+.ey{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ey::before{content:'';width:14px;height:1px;background:var(--accent)}
+h2{font-family:var(--D);font-weight:800;font-size:clamp(28px,4vw,48px);line-height:1.05;letter-spacing:-2px;margin-bottom:18px}
+h2 em{color:var(--accent);font-style:normal}
+.cp{font-size:14px;line-height:1.75;color:rgba(238,234,227,.55);max-width:580px;margin-bottom:12px}
+.cp strong{color:var(--text);font-weight:500}
+.cp:last-of-type{margin-bottom:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+
+/* ROLE TABLE */
+.rtable{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:20px}
+.rrow{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);font-size:13px;background:var(--surface)}
+.rrow:last-child{border-bottom:none}
+.rrow span:first-child{color:var(--muted2)}
+
+/* IMAGE PLACEHOLDER */
+.imgp{background:var(--surface);border:1px dashed rgba(255,255,255,.08);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);position:relative;overflow:hidden}
+.imgp::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,245,102,.02),transparent)}
+.imgp-icon{opacity:.25}
+.imgp-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.35;font-family:'Courier New',monospace;text-align:center}
+
+/* PHONES */
+.phones{display:flex;justify-content:center;gap:16px;align-items:flex-start}
+.phone{flex-shrink:0;background:var(--surface2);border:1px solid var(--border);border-radius:32px;overflow:hidden;display:flex;flex-direction:column}
+.phone.off{margin-top:40px}
+.pnotch{width:68px;height:20px;background:var(--bg);border-radius:0 0 12px 12px;margin:0 auto}
+.pscreen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px}
+.pscap{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:'Courier New',monospace;text-align:center}
+
+/* PROBLEM */
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:26px;transition:all .3s;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--out)}
+.pcard:hover{border-color:var(--bh);background:var(--surface2)} .pcard:hover::before{transform:scaleX(1)}
+.picon{font-size:20px;margin-bottom:10px}
+.ptitle{font-family:var(--D);font-size:14px;font-weight:700;margin-bottom:5px}
+.pdesc{font-size:12px;color:var(--muted2);line-height:1.6}
+
+/* EMPATHY */
+.egrid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;border-radius:20px;overflow:hidden;border:1px solid var(--border);margin-top:36px}
+.eq{background:var(--surface);padding:24px}
+.eq:nth-child(1){border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.eq:nth-child(2){border-bottom:1px solid var(--border)}
+.eq:nth-child(3){border-right:1px solid var(--border)}
+.badge{display:inline-flex;padding:3px 10px;border-radius:100px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
+.es .badge{background:rgba(184,245,102,.1);color:var(--accent)}
+.edo .badge{background:rgba(110,181,255,.1);color:var(--blue)}
+.et .badge{background:rgba(167,139,250,.1);color:var(--purple)}
+.ef .badge{background:rgba(255,107,157,.1);color:var(--pink)}
+.ei{font-size:12px;line-height:1.6;color:rgba(238,234,227,.55);padding:7px 0;border-bottom:1px solid var(--border)}
+.ei:last-child{border-bottom:none} .ei em{color:rgba(238,234,227,.78);font-style:italic}
+
+/* PSY */
+.psy{border-radius:18px;padding:28px 36px;position:relative;overflow:hidden;margin-bottom:14px}
+.psy.pu{background:linear-gradient(135deg,rgba(167,139,250,.06),rgba(110,181,255,.03));border:1px solid rgba(167,139,250,.15)}
+.psy.pp{background:linear-gradient(135deg,rgba(255,107,157,.05),transparent);border:1px solid rgba(255,107,157,.15)}
+.psy::before{content:'#';position:absolute;right:24px;top:10px;font-family:var(--D);font-size:60px;font-weight:800;color:rgba(255,255,255,.025);line-height:1}
+.ptag{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.ptag::before{content:'';width:10px;height:1px}
+.psy.pu .ptag{color:var(--purple)} .psy.pu .ptag::before{background:var(--purple)}
+.psy.pp .ptag{color:var(--pink)} .psy.pp .ptag::before{background:var(--pink)}
+.psyh{font-family:var(--D);font-size:18px;font-weight:800;letter-spacing:-.3px;margin-bottom:7px}
+.psyd{font-size:13px;color:rgba(238,234,227,.55);line-height:1.65}
+.psyd strong{color:var(--text);font-weight:500}
+
+/* FEATURES */
+.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
+.fcard{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:26px;display:flex;gap:16px;align-items:flex-start;transition:border-color .3s}
+.fcard:hover{border-color:rgba(184,245,102,.2)}
+.fnum{font-family:var(--D);font-size:30px;font-weight:800;color:rgba(184,245,102,.13);line-height:1;flex-shrink:0;letter-spacing:-2px}
+.ftitle{font-family:var(--D);font-size:14px;font-weight:700;margin-bottom:5px}
+.fdesc{font-size:12px;color:var(--muted2);line-height:1.6}
+
+/* SCREENS ROW */
+.srow{display:flex;gap:16px;align-items:flex-start;margin-top:48px;overflow-x:auto;padding-bottom:6px}
+.si{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scap{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);font-family:'Courier New',monospace}
+
+/* BEFORE/AFTER */
+.ba{display:grid;grid-template-columns:1fr 1fr;border-radius:20px;overflow:hidden;border:1px solid var(--border);margin-top:36px}
+.bac{padding:28px}
+.bac.af{background:var(--surface)}
+.balbl{font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;margin-bottom:16px}
+.before .balbl{color:var(--muted2)} .af .balbl{color:var(--accent)}
+.bai{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px;color:rgba(238,234,227,.52);line-height:1.55}
+.bai:last-child{border-bottom:none}
+.af .bai{color:rgba(238,234,227,.7)}
+.bico{flex-shrink:0;font-size:11px;margin-top:1px}
+
+/* IMPACT */
+.igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.icard{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;text-align:center;transition:all .3s}
+.icard:hover{border-color:rgba(184,245,102,.2)}
+.iico{font-size:20px;margin-bottom:8px}
+.ititle{font-family:var(--D);font-size:13px;font-weight:700;margin-bottom:4px;color:var(--accent)}
+.idesc{font-size:11px;color:var(--muted2);line-height:1.5}
+
+/* LESSONS */
+.llist{border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-top:36px}
+.li{background:var(--surface);padding:24px 28px;display:grid;grid-template-columns:26px 1fr;gap:16px;align-items:start;border-bottom:1px solid var(--border);transition:background .3s}
+.li:last-child{border-bottom:none} .li:hover{background:var(--surface2)}
+.ln{font-family:var(--D);font-size:11px;font-weight:800;color:var(--accent);padding-top:2px}
+.ltitle{font-family:var(--D);font-size:14px;font-weight:700;margin-bottom:4px;letter-spacing:-.2px}
+.ldesc{font-size:12px;color:var(--muted2);line-height:1.6}
+
+/* QUOTE */
+.q{border-left:2px solid var(--accent);padding:8px 0 8px 22px;margin:36px 0}
+.q p{font-family:var(--D);font-size:clamp(14px,2vw,20px);font-weight:600;letter-spacing:-.3px;line-height:1.4;color:rgba(238,234,227,.75);font-style:italic}
+.q cite{display:block;margin-top:7px;font-size:10px;color:var(--muted2);letter-spacing:.06em;font-style:normal;text-transform:uppercase}
+
+/* WIDE IMG */
+.wide-img{width:100%;border-radius:20px;overflow:hidden;margin-top:48px}
+
+/* NEXT */
+.next{padding:80px 56px;background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid var(--border)}
+.nlbl{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--muted2);margin-bottom:10px}
+.ntitle{font-family:var(--D);font-size:clamp(22px,4vw,40px);font-weight:800;letter-spacing:-1.5px;margin-bottom:4px}
+.nsub{font-size:13px;color:var(--muted2)}
+.nbtn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg);padding:14px 22px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s;flex-shrink:0;font-family:var(--D)}
+.nbtn:hover{transform:translateY(-2px);box-shadow:0 12px 28px var(--ag)}
+
+/* FOOTER */
+footer{padding:26px 56px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:12px;color:var(--muted)}
+.fl{display:flex;gap:22px}
+.fl a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+.fl a:hover{color:var(--accent)}
+
+/* PROGRESS */
+#pb{position:fixed;top:0;left:0;height:2px;z-index:1000;background:linear-gradient(90deg,var(--accent),var(--blue));width:0%;transition:width .1s}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(20px);transition:opacity .7s var(--out),transform .7s var(--out)}
+.r.v{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:16px 20px}
+  .hero{padding:0 20px 56px}
+  .hbot{flex-direction:column;gap:20px;align-items:flex-start}
+  .hacts{align-items:flex-start}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .st:nth-child(2){border-right:none}
+  .st:nth-child(3){border-right:1px solid var(--border);border-top:1px solid var(--border)}
+  .st:nth-child(4){border-top:1px solid var(--border);border-right:none}
+  .body{padding:0 20px}
+  .sec{padding:56px 0}
+  .two,.ba,.egrid{grid-template-columns:1fr}
+  .eq:nth-child(1),.eq:nth-child(2),.eq:nth-child(3){border-right:none;border-bottom:1px solid var(--border)}
+  .pgrid,.fgrid{grid-template-columns:1fr}
+  .igrid{grid-template-columns:repeat(2,1fr)}
+  .next{flex-direction:column;padding:48px 20px}
+  footer{padding:18px 20px;flex-direction:column;gap:10px;text-align:center}
+}
+@media(max-width:600px){
+  h1{font-size:clamp(40px,12vw,68px);letter-spacing:-2px}
+  .stats{grid-template-columns:1fr 1fr}
+  .sv{font-size:24px}
+  .igrid{grid-template-columns:1fr 1fr}
+  .li{padding:18px;grid-template-columns:22px 1fr;gap:10px}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo"><div class="dot"></div>Shyani Pal</a>
+  <a href="index.html#work" class="back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="19 12 5 12"/><polyline points="12 5 5 12 12 19"/></svg>
+    All Work
+  </a>
+  <a href="mailto:shyanipal06@gmail.com" class="ncta">Let's talk →</a>
+</nav>
+
+<section class="hero">
+  <div class="hbg"></div><div class="hgrid"></div>
+  <div class="bc">Case Study · 01 / 02</div>
+  <div class="htag"><span class="tline"></span>Founding Product Designer · Apr – Jun 2024</div>
+  <h1>Ho<span class="ol">Saksham</span></h1>
+  <div class="hbot">
+    <p class="hdesc">A <strong>SaaS product</strong> for yoga teachers and coaches to manage subscribers, automate invoicing, and collect payments — without spreadsheets.</p>
+    <div class="hacts">
+      <a href="https://hosaksham.in/" target="_blank" rel="noopener" class="live">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        hosaksham.in ↗
+      </a>
+      <div class="pill"><span class="pdot"></span>100+ downloads · Solo · 3 months</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="st r"><div class="sv">0→1</div><div class="sl">Full product lifecycle</div></div>
+  <div class="st r d1"><div class="sv">3mo</div><div class="sl">Discovery to ship</div></div>
+  <div class="st r d2"><div class="sv">100+</div><div class="sl">Downloads at launch</div></div>
+  <div class="st r d3"><div class="sv">1</div><div class="sl">Deep user · Priya</div></div>
+</div>
+
+<div class="body">
+
+  <!-- OVERVIEW -->
+  <section class="sec">
+    <div class="two">
+      <div>
+        <div class="ey r">Overview</div>
+        <h2 class="r">SaaS for <em>service providers</em></h2>
+        <p class="cp r d1">As <strong>founding and sole designer</strong>, I owned discovery, IA, interaction design, and dev handoff in a 3-month sprint.</p>
+        <div class="rtable r d2">
+          <div class="rrow"><span>Role</span><span>Founding Product Designer</span></div>
+          <div class="rrow"><span>Platform</span><span>Mobile · Android & iOS</span></div>
+          <div class="rrow"><span>Tools</span><span>Figma · FigJam · Maze</span></div>
+          <div class="rrow"><span>Competitor</span><span>Zoho (billing only)</span></div>
+          <div class="rrow"><span>Live</span><span><a href="https://hosaksham.in/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">hosaksham.in ↗</a></span></div>
+        </div>
+      </div>
+      <!-- Phone placeholders -->
+      <div class="phones r d1">
+        <div class="phone" style="width:175px;aspect-ratio:9/19.5;">
+          <div class="pnotch"></div>
+          <div class="pscreen">
+            <svg class="imgp-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(184,245,102,0.3)" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <div class="pscap">App screen</div>
+          </div>
+        </div>
+        <div class="phone off" style="width:175px;aspect-ratio:9/19.5;">
+          <div class="pnotch"></div>
+          <div class="pscreen">
+            <svg class="imgp-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(110,181,255,0.3)" stroke-width="1.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+            <div class="pscap">App screen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="sec">
+    <div class="ey r">The Problem</div>
+    <h2 class="r">Drowning in <em>admin</em></h2>
+    <p class="cp r d1">Yoga teachers waste hours on payments and invoices — work that has nothing to do with teaching.</p>
+    <div class="pgrid">
+      <div class="pcard r"><div class="picon">💸</div><div class="ptitle">Asking for money is awkward</div><div class="pdesc">Following up damages student relationships.</div></div>
+      <div class="pcard r d1"><div class="picon">📊</div><div class="ptitle">Manual spreadsheet tracking</div><div class="pdesc">Error-prone and impossible to act on fast.</div></div>
+      <div class="pcard r d2"><div class="picon">🧾</div><div class="ptitle">Invoices by hand</div><div class="pdesc">Hours spent monthly instead of teaching.</div></div>
+      <div class="pcard r d3"><div class="picon">❓</div><div class="ptitle">No payment visibility</div><div class="pdesc">Never clear who paid and who didn't.</div></div>
+    </div>
+  </section>
+
+  <!-- EMPATHY -->
+  <section class="sec">
+    <div class="ey r">User Research</div>
+    <h2 class="r">Meet <em>Priya</em></h2>
+    <p class="cp r d1">Yoga teacher · 20+ subscribers · Manages everything herself.</p>
+    <div class="egrid r d1">
+      <div class="eq es"><div class="badge">Says</div>
+        <div class="ei"><em>"I want to teach, not do paperwork."</em></div>
+        <div class="ei"><em>"I can't remember who has paid."</em></div>
+        <div class="ei"><em>"Why can't this be simpler?"</em></div>
+      </div>
+      <div class="eq edo"><div class="badge">Does</div>
+        <div class="ei">Manually tracks in a spreadsheet</div>
+        <div class="ei">Chases payments over WhatsApp</div>
+        <div class="ei">Forgets reminders → late payments</div>
+      </div>
+      <div class="eq et"><div class="badge">Thinks</div>
+        <div class="ei"><em>"Am I missing any payments?"</em></div>
+        <div class="ei"><em>"This is stealing my teaching time."</em></div>
+        <div class="ei"><em>"There has to be a better way."</em></div>
+      </div>
+      <div class="eq ef"><div class="badge">Feels</div>
+        <div class="ei"><strong>Frustrated</strong> by the repetition</div>
+        <div class="ei"><strong>Anxious</strong> about missed payments</div>
+        <div class="ei"><strong>Hopeful</strong> a tool could fix this</div>
+      </div>
+    </div>
+    <div class="q r">
+      <p>"This admin work is taking time away from what I love — teaching yoga."</p>
+      <cite>Priya · Yoga Teacher · Primary User</cite>
+    </div>
+  </section>
+
+  <!-- PSYCHOLOGY -->
+  <section class="sec">
+    <div class="ey r">Design Psychology</div>
+    <h2 class="r">Principles behind <em>the decisions</em></h2>
+    <div style="margin-top:28px;">
+      <div class="psy pu r">
+        <div class="ptag">Hick's Law</div>
+        <div class="psyh">Fewer choices. Faster decisions.</div>
+        <div class="psyd">Show only what needs action now. <strong>One CTA per screen.</strong> No overload.</div>
+      </div>
+      <div class="psy pp r">
+        <div class="ptag">Zeigarnik Effect</div>
+        <div class="psyh">Incomplete tasks demand attention.</div>
+        <div class="psyd">Unpaid invoices surface first. We <strong>channel that fixation into action</strong>, not stress.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="sec">
+    <div class="ey r">The Solution</div>
+    <h2 class="r">Four features. <em>That's it.</em></h2>
+    <p class="cp r d1">Every feature maps directly to a pain Priya named herself.</p>
+    <div class="fgrid">
+      <div class="fcard r"><div class="fnum">01</div><div><div class="ftitle">Track payments at a glance</div><div class="fdesc">Dashboard like a banking app — received, pending, overdue.</div></div></div>
+      <div class="fcard r d1"><div class="fnum">02</div><div><div class="ftitle">Send payment links via WhatsApp</div><div class="fdesc">One tap. Money lands in Priya's bank. No awkward texts.</div></div></div>
+      <div class="fcard r d2"><div class="fnum">03</div><div><div class="ftitle">Auto-generate monthly invoices</div><div class="fdesc">Generated from subscriber data. Review and send in seconds.</div></div></div>
+      <div class="fcard r d3"><div class="fnum">04</div><div><div class="ftitle">Manage subscribers & plans</div><div class="fdesc">Add subscribers, set prices, track who's active.</div></div></div>
+    </div>
+
+    <!-- Wide image placeholder -->
+    <div class="wide-img r">
+      <div class="imgp" style="height:400px;">
+        <svg class="imgp-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <div class="imgp-label">App screens · Replace with product screenshots</div>
+      </div>
+    </div>
+
+    <!-- 4 phone screens -->
+    <div class="srow r">
+      <div class="si">
+        <div class="phone" style="width:155px;aspect-ratio:9/19.5;">
+          <div class="pnotch"></div>
+          <div class="pscreen">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(184,245,102,0.35)" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <div class="pscap">Dashboard</div>
+          </div>
+        </div>
+        <div class="scap">Track payments</div>
+      </div>
+      <div class="si" style="margin-top:28px;">
+        <div class="phone" style="width:155px;aspect-ratio:9/19.5;">
+          <div class="pnotch"></div>
+          <div class="pscreen">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,107,157,0.35)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.18 13.18 19.79 19.79 0 0 1 1.08 4.54 2 2 0 0 1 3.05 2.36h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+            <div class="pscap">WhatsApp</div>
+          </div>
+        </div>
+        <div class="scap">Send link</div>
+      </div>
+      <div class="si">
+        <div class="phone" style="width:155px;aspect-ratio:9/19.5;">
+          <div class="pnotch"></div>
+          <div class="pscreen">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(110,181,255,0.35)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <div class="pscap">Invoice</div>
+          </div>
+        </div>
+        <div class="scap">Auto invoice</div>
+      </div>
+      <div class="si" style="margin-top:28px;">
+        <div class="phone" style="width:155px;aspect-ratio:9/19.5;">
+          <div class="pnotch"></div>
+          <div class="pscreen">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(167,139,250,0.35)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+            <div class="pscap">Subscribers</div>
+          </div>
+        </div>
+        <div class="scap">Manage plans</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="sec">
+    <div class="ey r">Before & After</div>
+    <h2 class="r">Priya's Monday morning, <em>redesigned</em></h2>
+    <div class="ba r d1">
+      <div class="bac before">
+        <div class="balbl">Before</div>
+        <div class="bai"><div class="bico" style="color:var(--pink)">✗</div><div>Digs through Sheets + WhatsApp to find who paid</div></div>
+        <div class="bai"><div class="bico" style="color:var(--pink)">✗</div><div>Texts students awkwardly asking for money</div></div>
+        <div class="bai"><div class="bico" style="color:var(--pink)">✗</div><div>2–3 hrs building invoices by hand</div></div>
+        <div class="bai"><div class="bico" style="color:var(--pink)">✗</div><div>No clear view of what's outstanding</div></div>
+      </div>
+      <div class="bac af">
+        <div class="balbl">After</div>
+        <div class="bai"><div class="bico" style="color:var(--accent)">✓</div><div>Dashboard: ₹18,400 received · 3 pending · 1 overdue</div></div>
+        <div class="bai"><div class="bico" style="color:var(--accent)">✓</div><div>Auto WhatsApp reminders on her schedule</div></div>
+        <div class="bai"><div class="bico" style="color:var(--accent)">✓</div><div>Invoices auto-generated · sent with one tap</div></div>
+        <div class="bai"><div class="bico" style="color:var(--accent)">✓</div><div>Real-time status per subscriber · nothing missed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="sec">
+    <div class="ey r">Impact</div>
+    <h2 class="r">What <em>changed</em></h2>
+    <div class="igrid">
+      <div class="icard r"><div class="iico">⚡</div><div class="ititle">Fewer errors</div><div class="idesc">No more spreadsheet mix-ups</div></div>
+      <div class="icard r d1"><div class="iico">⏱️</div><div class="ititle">Time saved</div><div class="idesc">Automated invoices & reminders</div></div>
+      <div class="icard r d2"><div class="iico">🧘</div><div class="ititle">Less stress</div><div class="idesc">Always knows who paid and when</div></div>
+      <div class="icard r d3"><div class="iico">🔔</div><div class="ititle">Zero missed actions</div><div class="idesc">Notifications handle what she forgot</div></div>
+    </div>
+  </section>
+
+  <!-- LESSONS -->
+  <section class="sec">
+    <div class="ey r">Lessons</div>
+    <h2 class="r">What I <em>learned</em></h2>
+    <div class="llist">
+      <div class="li r">
+        <div class="ln">01</div>
+        <div><div class="ltitle">One deep user beats a hundred shallow ones</div><div class="ldesc">Working exclusively with Priya kept every decision grounded, not assumed.</div></div>
+      </div>
+      <div class="li r">
+        <div class="ln">02</div>
+        <div><div class="ltitle">Psychology is a lens, not a law</div><div class="ldesc">Hick's Law started the conversation. Priya's behaviour ended it.</div></div>
+      </div>
+      <div class="li r">
+        <div class="ln">03</div>
+        <div><div class="ltitle">Constraints ship products</div><div class="ldesc">Free Figma, 2 engineers, 3 months. Complexity never had time to accumulate.</div></div>
+      </div>
+    </div>
+    <div class="q r">
+      <p>"Just like HoSaksham — we made it work with what we had."</p>
+      <cite>Shyani Pal · Founding Product Designer</cite>
+    </div>
+  </section>
+
+</div>
+
+<div class="next">
+  <div>
+    <div class="nlbl">Next Case Study</div>
+    <div class="ntitle">Fyle · Expense Management</div>
+    <div class="nsub">Enterprise fintech · Acquired by Sage · £3K+ monthly value unlocked</div>
+  </div>
+  <a href="index.html#work" class="nbtn">View all work →</a>
+</div>
+
+<footer>
+  <p>© 2026 Shyani Pal · Product Designer</p>
+  <div class="fl">
+    <a href="mailto:shyanipal06@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/shyanipal">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav'),bar=document.getElementById('pb');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('sc',window.scrollY>40);
+  const h=document.documentElement;
+  bar.style.width=Math.min((window.scrollY/(h.scrollHeight-h.clientHeight))*100,100)+'%';
+});
+new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');ro.unobserve(e.target)}})},{threshold:.08})
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');ro.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
